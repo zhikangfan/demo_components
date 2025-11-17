@@ -1,0 +1,126 @@
+:global(.messageDialogBox.messageDialogContainer) {
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+}
+:global(.messageDialogBox .el-dialog__body) {
+  position: relative;
+  padding: 0;
+}
+:global(.messageDialogBox .el-dialog) {
+  padding: 0;
+}
+:global(.messageDialogBox .el-dialog__header) {
+  display: none;
+}
+
+.bindDialog {
+  padding: 24px;
+  .title {
+    font-size: 16px;
+    color: #1b1f25;
+    font-weight: bold;
+  }
+  .closeIcon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  :global(.content .el-input__inner) {
+    border-radius: 8px;
+  }
+  .content {
+    min-height: 40px;
+    margin: 24px 0;
+    font-size: 14px;
+    color: #5d6c89;
+    line-height: 20px;
+    :global(.modal_item .el-input__inner) {
+      border-radius: 0 8px 8px 0;
+    }
+    .contentText {
+      margin-bottom: 16px;
+    }
+    .modal_item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .dropBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 40px;
+        font-size: 14px;
+        color: #000;
+        background: rgb(241, 242, 244);
+        border: 1px solid rgb(232, 234, 236);
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+    }
+
+    .code_item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .getCodeBtn {
+        flex-shrink: 0;
+        width: 104px;
+        height: 40px;
+        margin-left: 8px;
+        border-radius: 8px;
+        color: rgb(34, 37, 41);
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid rgb(232, 234, 236);
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+          border-color: #f1f2f4;
+        }
+
+        &.disabled {
+          border-color: rgb(241, 242, 244);
+          background: rgb(241, 242, 244);
+          color: rgb(180, 184, 191);
+        }
+      }
+    }
+  }
+  .btnGroups {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn {
+      min-width: 88px;
+      height: 40px;
+      padding: 0 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-sizing: border-box;
+      outline: none;
+      border: none;
+    }
+    .leftBtn {
+      color: #5d6c89;
+
+      background-color: #fff;
+      border: 1px solid #d9dde4;
+    }
+    .rightBtn {
+      margin-left: 12px;
+      color: #fff;
+      background: #ff8c1f;
+      &:hover {
+        background: #ff9f22;
+      }
+    }
+  }
+}

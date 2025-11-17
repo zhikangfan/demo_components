@@ -1,0 +1,148 @@
+//设置背景图片
+.backgroundImg(@url) {
+  background-image: url(@url);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.userInfoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80px;
+  cursor: pointer;
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .settingLink {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #5d6c89;
+    text-decoration: none;
+  }
+
+  .logoutBtn {
+    font-size: 14px;
+    color: #5d6c89;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+  .purchaseButton {
+    width: 88px;
+    height: 32px;
+    color: #fff;
+    border-radius: 28px;
+    font-size: 12px;
+    background: linear-gradient(135deg, #ffbc4e 0%, #ff8a1c 100%);
+    border: none;
+    cursor: pointer;
+  }
+
+  .userInfoContainer {
+    display: none;
+    position: absolute;
+    top: calc(80px - 10px);
+    right: -36px;
+    width: 288px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    padding: 24px;
+
+    .userInfoBox {
+      display: flex;
+      align-items: center;
+      .userAvatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
+        border-radius: 50%;
+      }
+
+      .userInfoBoxRight {
+        .nickname {
+          width: 180px;
+          margin-bottom: 4px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 24px;
+          color: #000;
+        }
+
+        .user {
+          display: flex;
+          align-items: center;
+
+          .tag {
+            margin-right: 20px;
+            padding: 2px 4px;
+            color: #a0acbb;
+            font-size: 12px;
+            border-radius: 4px;
+            background-color: #f2f4fa;
+          }
+          .vipTag {
+            margin-right: 10px;
+            font-size: 12px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: rgba(77, 42, 0, 1);
+            background: linear-gradient(97deg, #fdf6db 0%, #f3dca9 100%);
+          }
+          .userIdBox {
+            display: flex;
+            align-items: center;
+          }
+          .userId {
+            font-size: 12px;
+            color: #a0acbb;
+          }
+          .copyBtn {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 4px;
+            cursor: pointer;
+            .backgroundImg('@/assets/images/copy.svg');
+          }
+        }
+      }
+    }
+
+    .residualEquity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 16px 0;
+      padding: 8px;
+      background-color: #f2f4fa;
+
+      .countBox {
+        display: flex;
+        flex-direction: column;
+        color: #5d6c89;
+        font-size: 12px;
+
+        .count {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .userInfoContainer {
+      display: block;
+    }
+  }
+}

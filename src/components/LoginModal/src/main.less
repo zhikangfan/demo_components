@@ -1,0 +1,275 @@
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+//设置背景图片
+.backgroundImg(@url) {
+  background-image: url(@url);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+:global(.loginBox .el-dialog__header) {
+  display: none;
+}
+:global(.loginBox .el-dialog__body) {
+  position: relative;
+  padding: 0;
+}
+
+:global(.loginBox.loginContainer) {
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+}
+
+:global(.loginMain .loginPhone .el-input__inner){
+  border-radius: 8px;
+  height: 46px;
+}
+:global(.loginMain. .loginPhone .el-input__wrapper) {
+  border-radius: 8px !important;
+}
+.loginMain {
+  display: flex;
+
+  .btnGroups {
+    display: flex;
+    align-items: center;
+    margin-top: 14px;
+  }
+
+  .changeBtn {
+    cursor: pointer;
+    margin: 0 12px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 15px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background: #ff8c1f;
+    &:hover {
+      background: #ff9f22;
+    }
+
+    &.visitorLoginBtn {
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+      }
+    }
+  }
+
+  .closeIcon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 20px;
+    color: rgb(78, 89, 105);
+    cursor: pointer;
+  }
+
+  .mainLeft {
+    flex-shrink: 0;
+    flex: 1;
+    height: 486px;
+    background: url('./assets/img/login_bg.svg') no-repeat center/cover;
+  }
+  .mainRight {
+    padding-top: 60px;
+    flex-shrink: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .rightTitle {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      .wxIcon {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+        .backgroundImg('./assets/img/wx.svg');
+      }
+    }
+
+    .qrCodeWrapper {
+      //margin: 62px 0 24px 0;
+      height: 160px;
+      width: 160px;
+      margin-top: 62px;
+      border-radius: 8px;
+      border: 1px solid #a0acbb;
+      overflow: hidden;
+
+      .loadingBox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 25px;
+          height: 25px;
+          z-index: 2;
+          border-radius: 50%;
+          overflow: hidden;
+          background: url('./assets/img/loading.png') no-repeat center/cover;
+          animation: rotate linear 0.8s infinite;
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+      //.payQrCode {
+      //  width: 148px;
+      //  height: 148px;
+      //  padding: 10px;
+      //  border-radius: 8px;
+      //  border: 1px solid #a0acbb;
+      //}
+
+      .qrcodeContentBox {
+        width: 100%;
+        height: 100%;
+
+        .qrCodeStatusContent {
+        }
+        .qrCodeStatusBox {
+          width: 100%;
+          height: 100%;
+          //background: url('../../assets/img/qr_code_loading.jpg') no-repeat center/cover;
+
+          .qrCodeStatusContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 16px;
+            .refreshBtn {
+              display: block;
+              width: 30px;
+              height: 30px;
+              margin-bottom: 8px;
+              cursor: pointer;
+              background: url('./assets/img/refresh.svg') no-repeat center/35px 35px;
+            }
+          }
+        }
+      }
+    }
+
+    .formBox {
+      margin-top: 62px;
+    }
+
+    .tips {
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #a0acbb;
+    }
+  }
+
+  //.loginPhone /deep/ .el-input__inner {
+  //  border-radius: 8px;
+  //  height: 46px;
+  //}
+  .loginPhone {
+    .contentText {
+      margin-bottom: 16px;
+    }
+    .modal_item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .dropBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 40px;
+        font-size: 14px;
+        color: #000;
+        background: rgb(241, 242, 244);
+        border: 1px solid rgb(232, 234, 236);
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+    }
+
+    .code_item {
+      display: flex;
+      align-items: center;
+
+      .getCodeBtn {
+        flex-shrink: 0;
+        width: 104px;
+        height: 46px;
+        margin-left: 8px;
+        border-radius: 4px;
+        color: rgb(34, 37, 41);
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid rgb(232, 234, 236);
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+          border-color: #f1f2f4;
+        }
+
+        &.disabled {
+          border-color: rgb(241, 242, 244);
+          background: rgb(241, 242, 244);
+          color: rgb(180, 184, 191);
+        }
+      }
+    }
+
+    .loginBtn {
+      background: #ff8c1f;
+      height: 40px;
+      border: none;
+      &:hover {
+        background: #ff9f22;
+      }
+    }
+  }
+}

@@ -1,0 +1,362 @@
+@keyframes scroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, -48px);
+  }
+}
+
+:global(.purchaseBox .el-dialog__header) {
+  display: none;
+}
+:global(.purchaseBox .el-dialog__body) {
+  position: relative;
+  padding: 0;
+}
+
+:global(.purchaseBox.purchaseWrapper) {
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.purchaseModalMain {
+  position: relative;
+
+  .title {
+    position: absolute;
+    top: 33px;
+    left: 31px;
+    font-size: 16px;
+    color: #1b1f25;
+  }
+
+  .countDownBox {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fcf3ef;
+    border-radius: 8px;
+    padding: 10px;
+    gap: 20px;
+    width: 250px;
+
+    .countDownTitle {
+      color: #6b2d00;
+      font-size: 14px;
+    }
+
+    .timeBox {
+      display: flex;
+      align-items: center;
+      .time {
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border-radius: 4px;
+        text-align: center;
+        line-height: 24px;
+
+        span {
+          font-size: 16px;
+          font-weight: 700;
+          background: linear-gradient(180deg, #ff3c3c, #ffa800);
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+      }
+
+      .semicolon {
+        font-size: 14px;
+        margin: 0 2px;
+        font-weight: 700;
+        background: linear-gradient(180deg, #ff3c3c, #ffa800);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+    }
+  }
+
+  .contentBox {
+    position: absolute;
+    top: 102px;
+    left: 19px;
+    display: flex;
+    align-items: center;
+
+    .packageList {
+      display: flex;
+      //justify-content: space-between;
+
+      .packageItem {
+        position: relative;
+
+        margin-right: 9px;
+
+        .packageItemContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 120px;
+          background-color: #fff;
+          border-radius: 8px;
+          border: 1px solid #d9dde4;
+          cursor: pointer;
+          overflow: hidden;
+        }
+
+        &:nth-last-of-type(1) {
+          margin-right: 0;
+        }
+
+        .corner {
+          position: absolute;
+          left: -1px;
+          transform: translateY(-50%);
+          padding: 4px 8px;
+          border-radius: 8px 1px;
+          font-size: 12px;
+          z-index: 2;
+          color: #fff;
+          border-radius: 8px 1px;
+          background: linear-gradient(127deg, #ff4930 0%, #ee7942 100%);
+        }
+
+        .packageTitle {
+          margin-top: 24px;
+          margin-bottom: 12px;
+          color: #1b1f25;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 20px;
+        }
+        .priceBox {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          //justify-content: center;
+          width: 100%;
+          height: 56px;
+          margin-bottom: 14px;
+          .currentPrice {
+            color: #ff4930;
+            font-size: 12px;
+
+            .price_1 {
+              font-size: 24px;
+              font-weight: bold;
+            }
+            .unit {
+              color: #a0acbb;
+            }
+          }
+
+          .originPrice_1 {
+            position: relative;
+            font-size: 12px;
+            line-height: 18px;
+            color: #5d6c89;
+
+            &::after {
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              content: '';
+              width: 100%;
+              height: 1px;
+              background-color: #5d6c89;
+            }
+          }
+        }
+        .packageDesc {
+          width: 100%;
+          padding: 4px 0;
+          text-align: center;
+          font-size: 12px;
+          line-height: 18px;
+          color: #5d6c89;
+          border-top: 1px solid #d9dde4;
+        }
+
+        &.active {
+          .packageItemContainer {
+            border-color: #f3dca9;
+            background: #fdf6db;
+          }
+          //.packageTitle {
+          //  color: #fde87c;
+          //}
+          //.priceBox {
+          //  .currentPrice {
+          //    color: #fde87c;
+          //
+          //    .unit {
+          //      color: #fde87c;
+          //    }
+          //  }
+          //  .originPrice {
+          //    color: #fff;
+          //    &::after {
+          //      background-color: #fff;
+          //    }
+          //  }
+          //}
+          .packageDesc {
+            color: #1b1f25;
+            background: #f3dca9;
+          }
+        }
+      }
+    }
+  }
+
+  .descList {
+    position: absolute;
+    left: 32px;
+    font-size: 12px;
+    bottom: 97px;
+
+    .listItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+        background: url('./assets/img/radio-true.svg') no-repeat center/cover;
+      }
+      margin-bottom: 9px;
+    }
+  }
+
+  .payChannelBox {
+    position: absolute;
+    right: 52px;
+    bottom: 49px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #5d6c89;
+
+    .wechat_icon,
+    .ali_icon {
+      display: block;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+    .wechat_icon {
+      background: url('./assets/img/wechat_icon.svg') no-repeat center/cover;
+    }
+    .ali_icon {
+      background: url('./assets/img/ali_pay_icon.svg') no-repeat center/cover;
+    }
+  }
+
+  .payTitle {
+    position: absolute;
+    right: 60px;
+    top: 46px;
+    font-size: 12px;
+    color: #5d6c89;
+  }
+  .originPrice {
+    position: absolute;
+    right: 50px;
+    top: 75px;
+    font-size: 12px;
+    color: #aba6a6;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 110%;
+      height: 1px;
+      background: #aba6a6;
+    }
+  }
+  .price {
+    position: absolute;
+    right: 83px;
+    top: 68px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff4930;
+
+    .unit {
+      margin-right: 3px;
+      font-size: 14px;
+    }
+  }
+
+  .closeIcon {
+    position: absolute;
+    right: 10px;
+    top: 28px;
+    font-size: 18px;
+    color: #acb7c3;
+    cursor: pointer;
+  }
+  .qrCodeBox {
+    position: absolute;
+    right: 31px;
+    top: 98px;
+    width: 128px;
+    height: 128px;
+    border-radius: 8px;
+    overflow: hidden;
+    .qrCodeImg {
+      width: 100%;
+      height: 100%;
+    }
+    .loading {
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+
+      .loadingImg {
+        width: 20px;
+        height: 20px;
+        animation: rotate linear 0.8s infinite;
+      }
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    left: 33px;
+    bottom: 33px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #aba6a6;
+    border: 1px solid #f3efef;
+    cursor: pointer;
+  }
+}

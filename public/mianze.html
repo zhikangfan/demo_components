@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一键恶搞生成器 - 免责声明</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            color: #2d3748;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 50px;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #4299e1;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            color: #4299e1;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .title-divider {
+            height: 4px;
+            width: 100px;
+            background: linear-gradient(to right, #4299e1, #63b3ed);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #718096;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .legal-icon {
+            font-size: 120px;
+            text-align: center;
+            color: rgba(66, 153, 225, 0.15);
+            margin: 30px 0;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            background: #f8fafc;
+            padding: 25px 30px;
+            border-radius: 12px;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+        
+        h2 {
+            color: #2b6cb0;
+            margin-bottom: 20px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 12px;
+            color: #4299e1;
+        }
+        
+        h3 {
+            color: #4299e1;
+            margin: 18px 0 10px;
+            font-size: 20px;
+            padding-left: 10px;
+            border-left: 3px solid #a0aec0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 18px;
+            color: #4a5568;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 15px 0 5px 25px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 17px;
+            color: #4a5568;
+        }
+        
+        li:before {
+            content: "•";
+            color: #4299e1;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+        
+        .prohibited li:before {
+            content: "⨯";
+            color: #e53e3e;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, rgba(255, 243, 205, 0.7) 40%);
+            padding: 0 5px;
+            font-weight: 600;
+            border-radius: 3px;
+            color: #2d3748;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .footer-logo i {
+            font-size: 28px;
+            color: #4299e1;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 0 5px;
+            font-weight: 600;
+            border: 1px solid #bee3f8;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            p, li {
+                font-size: 16px;
+            }
+        }
+        
+        .warning-note {
+            background: #fffaf0;
+            border-left: 5px solid #dd6b20;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-note h3 {
+            color: #dd6b20;
+            border: none;
+            margin-top: 0;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>一键恶搞生成器免责声明</h1>
+            <div class="subtitle">PS.YIJIAN.CN</div>
+            <div class="title-divider"></div>
+            <p>在您使用本工具的所有功能前，请仔细阅读并完全理解以下声明内容。使用本服务即表示您已接受本声明的全部条款。</p>
+            <div class="legal-icon">
+                <i class="fas fa-gavel"></i>
+            </div>
+        </div>
+        
+        <section>
+            <h2><i class="fas fa-info-circle"></i> 1. 工具性质与用途</h2>
+            <p>本"一键恶搞生成器"提供的所有内容创作功能（包括但不限于炫富图片生成、创意恶搞图片生成）均<span class="highlight">仅限于娱乐、技术学习及合法社交用途</span>。</p>
+            
+            <div class="warning-note">
+                <h3>允许的使用场景：</h3>
+                <ul>
+                    <li>朋友间的轻松幽默互动与无害恶作剧</li>
+                    <li>创意表白、节日祝福等情感表达方式</li>
+                    <li>图像处理技术研究与学习案例</li>
+                    <li>非商业性的社交媒体内容创作</li>
+                    <li>其他符合公序良俗的创意表达</li>
+                </ul>
+            </div>
+            
+            <p>所有生成内容均为<span class="highlight">虚构创作</span>，不反映任何真实个人信息、资产状况或官方立场。用户不应将生成内容视为事实表达或作为决策依据。</p>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-ban"></i> 2. 严禁行为说明</h2>
+            <p>您承诺并保证<span class="highlight">不得将生成内容用于任何违法违规行为</span>，包括但不限于以下情形：</p>
+            
+            <ul class="prohibited">
+                <li>冒用他人身份或虚构资产状况进行欺诈、诱导及诈骗活动</li>
+                <li>伪造、变造任何具有法律效力的文件、凭证或资质证明</li>
+                <li>散布谣言、恶意诽谤、侵害他人名誉权/肖像权/隐私权</li>
+                <li>制作含有人身攻击、侮辱性、歧视性或性骚扰的内容</li>
+                <li>用于商业推广、虚假宣传或诱导性营销</li>
+                <li>煽动不良价值观、破坏社会公序良俗及道德底线</li>
+                <li>实施网络暴力或对特定个人/群体制造伤害</li>
+                <li>违反中华人民共和国法律及用户所在地相关法律法规</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-user-shield"></i> 3. 用户责任与义务</h2>
+            <p>您完全理解并确认：本工具生成的<span class="highlight">所有内容仅具备娱乐价值</span>，不具备任何法律效力或事实依据。</p>
+            
+            <h3>责任划分</h3>
+            <p>您必须对自身行为承担全部责任。因不当使用生成内容导致的纠纷或损害（包括但不限于以下情形）：</p>
+            <ul>
+                <li>面临法律诉讼或行政处罚</li>
+                <li>造成个人或机构的经济损失</li>
+                <li>导致个人信誉或社会评价受损</li>
+                <li>被社交平台限制功能或封禁账户</li>
+            </ul>
+            <p><span class="highlight">所有后果均由用户自行承担</span>。平台开发者和运营方不承担任何形式的连带责任。</p>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-balance-scale"></i> 4. 内容合规性声明</h2>
+            
+            <h3>炫富内容规范</h3>
+            <p>本平台生成的炫富类图片均包含虚构视觉元素，<span class="highlight">不代表平台价值观或对任何生活方式的提倡</span>。我们反对消费主义至上的价值观，所有内容仅作娱乐用途。</p>
+            
+            <h3>恶搞内容规范</h3>
+            <p>健康幽默应有道德底线，您在使用恶搞功能时承诺：</p>
+            <ul>
+                <li>不使用真实个人身份信息（尤其是他人信息）</li>
+                <li>不得针对特定个人或群体（包括公众人物）</li>
+                <li>不涉及种族、性别、地域等敏感议题</li>
+                <li>符合目标受众接受程度和文化敏感性</li>
+            </ul>
+            
+            <div class="warning-note">
+                <h3>特别警示</h3>
+                <p>使用包含公众人物形象的模板时，需严格遵守《中华人民共和国民法典》第一千零一十九条关于肖像权的规定。未经同意的商业使用或诽谤性使用将承担法律责任。</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-exclamation-triangle"></i> 5. 最终法律声明</h2>
+            <p>本平台提供的所有服务及内容均遵循以下原则：</p>
+            <ul>
+                <li>任何违法行为均系个人行为，与平台开发者/运营方无关</li>
+                <li>平台保留对严重违规用户终止服务的权利</li>
+            </ul>
+            <p><span class="highlight">您使用本服务即视为已充分理解并接受上述所有条款</span>，同意完全承担因违规操作带来的一切风险与责任。</p>
+        </section>
+        
+        <div class="footer">
+            <div class="footer-logo">
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-user-secret"></i>
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <p><span class="tag">免责声明</span> <span class="tag">合法使用</span> <span class="tag">内容虚构</span> <span class="tag">后果自负</span></p>
+            <p>&copy; 2025 一键恶搞生成器平台 | 法律声明版本：V2.3</p>
+            <p>最后修订日期：2025年6月10日 | 本文件具有法律参考效力</p>
+        </div>
+    </div>
+</body>
+</html>
