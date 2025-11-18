@@ -1,16 +1,18 @@
 <template>
   <div
-    class="rowContainer"
-    style="
-      font-size: 24px;
-      font-family: Yuanti SC;
-      color: rgb(203, 207, 214);
-      height: 10mm;
-      line-height: 140%;
-      letter-spacing: 0px;
+    class="pinyinRow"
+    :style="
+      {
+        fontSize: `${props.fontSize}px`,
+        fontFamily: `${props.fontFamily}`,
+        color: 'rgb(203, 207, 214)',
+        height: `${props.height}mm`,
+        lineHeight: `${props.lineHeight}%`,
+        letterSpacing: props.letterSpacing + 'px',
+      }
     "
   >
-    <Pinyin style="width: 100%; height: 100%; position: absolute; z-index: 1" />
+    <PinYinLine :outer-line="props.outerLine" :inner-line="props.innerLine" style="width: 100%; height: 100%; position: absolute; z-index: 1"/>
     <div class="content" style="white-space: pre">
       <span
         v-for="(cell,idx) in cells"
@@ -21,62 +23,14 @@
     </div>
   </div>
 </template>
-<script setup>
-
-import Pinyin from '@/components/Pinyin/index.vue'
+<script setup lang="ts">
 import {computed} from 'vue'
-const props = defineProps({
-  text: String,
-  filledNumber: {
-    type: Number,
-    default: 1
-  },
-  unfilledNumber: {
-    type: Number,
-    default: 0
-  },
-  filledColor: {
-    type: String,
-    default: '#000'
-  },
-  unfilledColor: {
-    type: String,
-    default: '#cbcfd6'
-  },
-  fontSize: {
-    type: String,
-    default: '24px'
-  },
-  letterSpacing: {
-    type: String,
-    default: '0px'
-  },
-  height: {
-    type: Number,
-    default: 10 // 单位：mm
-  },
-  lineHeight: {
-    type: String,
-    default: '140%'
-  },
-  fontFamily: {
-    type: String,
-    default: 'Yuanti SC'
-  },
-  splitLine: {
-    type: Object,
-    default() {
-      return {
-        stroke: 'rgb(200, 200, 200)',
-        strokeWidth: '1',
-        strokeDasharray: 0,
-      }
-    }
-  }
-})
+import pinyinRowProps from './props.js'
+import PinYinLine from '@/components/Icon/PinYinLine.vue'
+const props = defineProps(pinyinRowProps)
 
 // 计算总的span数量
-const totalCell = computed(() => props.filledNumber + props.unfilledNumber)
+const totalCell = computed(() => props.filledNumber + props.unfilledNumber + 1) // 加1为了解决描词数量不一致
 const cells = computed(() => {
   return new Array(totalCell.value).fill('').map((item,idx) => {
     return {
@@ -85,16 +39,17 @@ const cells = computed(() => {
         height: props.height + 'mm',
         borderLeft: `${props.splitLine.strokeWidth}px ${props.splitLine.strokeDashArray > 0 ? 'solid' : 'dashed'} ${props.splitLine.stroke}`,
       },
-      text: idx <= props.filledNumber - 1 ? props.text: ''
+      text: idx <= props.filledNumber ? props.text: ''
     }
   })
 })
 
 </script>
 <style lang="less" scoped>
-.rowContainer {
+.pinyinRow {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 .content {
   position: relative;
@@ -105,8 +60,8 @@ const cells = computed(() => {
   width: 100%;
 
   span {
-    flex-shrink: 0;
     flex: 1;
+    flex-shrink: 0;
     text-align: center;
 
     &:nth-of-type(1) {

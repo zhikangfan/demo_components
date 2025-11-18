@@ -1,6 +1,14 @@
 <template>
   <div
     class="chinese"
+    :style="{
+        width: `${props.size}px`,
+        height: `${props.size}px`,
+        fontSize: `${props.fontSize}px`,
+        fontFamily: props.fontFamily,
+        color: `${props.color}`,
+        lineHeight: `${props.lineHeight}%`,
+    }"
   >
     <div class="chineseBg">
       <Line :outer-line="props.outerLine" v-if="props.type === 'line'" />
@@ -59,53 +67,17 @@ import Line from '@/components/Icon/Line.vue'
 import MouseLine from '@/components/Icon/MouseLine.vue'
 import VerticalLine from '@/components/Icon/VerticalLine.vue'
 import FieldLine from '@/components/Icon/FieldLine.vue'
-const props = defineProps({
-  text: {
-    type: String,
-    required: false,
-  },
-  type: {
-    type: String,
-    validator(value) {
-      return [
-        'empty',
-        'line',
-        'horizontalLine',
-        'verticalLine',
-        'mouseLine',
-        'riceLine',
-        'fieldLine',
-        'wellLine',
-        'nestWellLine',
-        'nestMouseLine',
-        'nestMouseLine2',
-        'nestMouseLine3',
-        'nestMouseLine4',
-      ].includes(value)
-    },
-    default: 'empty',
-  },
-  outerLine: {
-    type: Object,
-    default() {
-      return {
-        stroke: '#4c5662ff',
-        strokeWidth: '1',
-        strokeDasharray: '1',
-      }
-    },
-  },
-  innerLine: {
-    type: Object,
-    default() {
-      return {
-        stroke: '#4c5662ff',
-        strokeWidth: '0.5',
-        strokeDasharray: '0',
-      }
-    },
-  },
-})
+import HorizontalLine from '@/components/Icon/HorizontalLine.vue'
+import WellLine from '@/components/Icon/WellLine.vue'
+import NestMouseLine from '@/components/Icon/NestMouseLine.vue'
+import NestWellLine from '@/components/Icon/NestWellLine.vue'
+import NestMouseLine2 from '@/components/Icon/NestMouseLine2.vue'
+import NestMouseLine3 from '@/components/Icon/NestMouseLine3.vue'
+import NestMouseLine4 from '@/components/Icon/NestMouseLine4.vue'
+
+import ChineseProps from './props.js'
+const props = defineProps(ChineseProps)
+
 </script>
 <style scoped lang="less">
 .chinese{

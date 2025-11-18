@@ -1,35 +1,25 @@
 <template>
-  <div class="pinyin">
+  <div
+    class="pinyin"
+    :style="{
+      height: `${props.height}px`,
+      fontSize: `${props.fontSize}px`,
+      fontFamily: `${props.fontFamily}`,
+      color: `${props.color}`,
+      lineHeight: `${props.lineHeight}%`,
+      letterSpacing: `${props.letterSpacing}px`,
+    }"
+  >
     <div class="pinyinBg">
-      <PinYinLine :outer-line="props.outerLine" :inner-line="props.innerLine"/>
+      <PinYinLine :outer-line="props.outerLine" :inner-line="props.innerLine" />
     </div>
-    {{props.text}}
+    {{ props.text }}
   </div>
 </template>
 <script setup>
-  const props = defineProps({
-    text: String,
-    outerLine: {
-      type: Object,
-      default() {
-        return {
-          stroke: '#4c5662ff',
-          strokeWidth: '1',
-          strokeDasharray: '1',
-        }
-      },
-    },
-    innerLine: {
-      type: Object,
-      default() {
-        return {
-          stroke: '#4c5662ff',
-          strokeWidth: '0.5',
-          strokeDasharray: '0',
-        }
-      },
-    },
-  })
+import PinYinLine from '@/components/Icon/PinYinLine.vue'
+import PinyinProps from './props.js'
+const props = defineProps(PinyinProps)
 </script>
 <style scoped lang="less">
 .pinyin {
