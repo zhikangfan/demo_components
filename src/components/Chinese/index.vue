@@ -2,12 +2,12 @@
   <div
     class="chinese"
     :style="{
-        width: `${props.size}px`,
-        height: `${props.size}px`,
-        fontSize: `${props.fontSize}px`,
-        fontFamily: props.fontFamily,
-        color: `${props.color}`,
-        lineHeight: `${props.lineHeight}%`,
+      width: `${props.size}px`,
+      height: `${props.size}px`,
+      fontSize: `${props.fontSize}px`,
+      fontFamily: props.fontFamily,
+      color: `${props.color}`,
+      lineHeight: `${props.lineHeight}%`,
     }"
   >
     <div class="chineseBg">
@@ -56,9 +56,7 @@
         v-else-if="props.type === 'nestMouseLine4'"
       />
     </div>
-    <div class="text">
-      {{ props.text }}
-    </div>
+    <div class="text" v-html="props.text"></div>
   </div>
 </template>
 <script setup>
@@ -77,10 +75,9 @@ import NestMouseLine4 from '@/components/Icon/NestMouseLine4.vue'
 
 import ChineseProps from './props.js'
 const props = defineProps(ChineseProps)
-
 </script>
 <style scoped lang="less">
-.chinese{
+.chinese {
   position: relative;
   overflow: hidden;
   display: flex;
