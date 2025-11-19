@@ -3,6 +3,15 @@ export default {
     type: String,
     required: false,
   },
+  pinyin: {
+    type: String,
+  },
+  polyphonic: {
+    type: Array,
+    default() {
+      return []
+    },
+  },
   type: {
     type: String,
     validator(value) {
@@ -44,9 +53,10 @@ export default {
       }
     },
   },
-  size: { // 格子大小
+  size: {
+    // 格子大小
     type: Number,
-    default: 38
+    default: 38,
   },
   fontFamily: {
     type: String,
@@ -62,18 +72,18 @@ export default {
           KaiTi,
           KaiTi_GB2312,
           DFKai-SB,
-          TW-Kai`
+          TW-Kai`,
   },
   lineHeight: {
     type: Number,
-    default: 120
+    default: 120,
   },
   fontSize: {
     type: Number,
-    default: 30
+    default: 30,
   },
   color: {
     type: String,
-    default: '#000000'
-  }
+    default: '#000000',
+  },
 }

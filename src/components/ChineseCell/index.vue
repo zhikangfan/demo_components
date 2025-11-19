@@ -1,6 +1,6 @@
 <template>
   <div :class="ss.chineseCell">
-    <Pinyin v-bind="props.pinyinProps" v-if="props.showPinyin" />
+    <Pinyin v-bind="props.pinyinProps" v-if="props.showPinyin" :style="props.cellWidth ? { width: props.cellWidth + 'px' } :{}"/>
     <Chinese v-bind="props.chineseProps" />
   </div>
 </template>

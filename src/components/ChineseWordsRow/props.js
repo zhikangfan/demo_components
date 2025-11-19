@@ -2,20 +2,8 @@ import ChineseCellProps from '@/components/ChineseCell/props.js'
 
 export default {
   ...ChineseCellProps,
-  showChineseStroke: {
-    // 是否启用笔画
-    type: Boolean,
-    default: false,
-  },
-  chineseStrokes: {
-    type: Array,
-    default() {
-      return []
-    },
-  },
-  chineseStrokeSize: {
-    type: Number,
-    default: 23,
+  words: {
+    type: String,
   },
   spacing: {
     type: Number,

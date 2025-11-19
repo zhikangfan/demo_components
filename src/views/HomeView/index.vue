@@ -5,6 +5,8 @@ import PinyinRow from '@/components/PinyinRow/index.vue'
 import PinyinTable from '@/components/PinyinTable/index.vue'
 import ChineseTable from '@/components/ChineseTable/index.vue'
 import ss from './index.module.less'
+import ChineseWordsRow from '@/components/ChineseWordsRow/ChineseWordsRow.vue'
+import ChineseWordsTable from '@/components/ChineseWordsTable/ChineseWordsTable.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -78,14 +80,24 @@ const props = defineProps({
 
 
 
-    <ChineseTable
-      :content="['中', '国']"
-      :chinese-size="10"
-      :pinyin-height="8"
-      :unfilled-rows="2"
-      :show-pinyin="true"
-      :show-chinese-stroke="false"
-      :line-spacing="10"
-    />
+<!--    <ChineseTable-->
+<!--      :content="['中', '，', '', '国']"-->
+<!--      :chinese-size="10"-->
+<!--      :pinyin-height="8"-->
+<!--      :unfilled-rows="2"-->
+<!--      :show-pinyin="true"-->
+<!--      :show-chinese-stroke="true"-->
+<!--      :line-spacing="10"-->
+<!--      :chinese-stroke-size="6"-->
+<!--    />-->
+
+        <ChineseWordsTable
+          :content="['中', '国']"
+          :chinese-size="10"
+          :pinyin-height="8"
+          :unfilled-rows="2"
+          :show-pinyin="true"
+          :line-spacing="10"
+        />
   </div>
 </template>

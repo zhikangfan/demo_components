@@ -9,6 +9,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig((mode) => {
@@ -45,7 +46,8 @@ export default defineConfig((mode) => {
         minify: true,
         entry: 'src/main.js',
         template: 'public/index.html',
-      })
+      }),
+      tailwindcss(),
     ],
     resolve: {
       alias: {
