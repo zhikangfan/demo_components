@@ -28,7 +28,7 @@ export const isNumber = (str) => {
  * @returns {boolean}
  */
 export const isChineseSymbol = (str) => {
-  return /^[\u3000-\u303F\uFF00-\uFFEF]$/.test(str);
+  return /^[\u3000-\u303F\uFF00-\uFFEF]$/.test(str)
 }
 /**
  * 是否是英文字符
@@ -36,5 +36,5 @@ export const isChineseSymbol = (str) => {
  * @returns {boolean}
  */
 export const isEnglishSymbol = (char) => {
-  return /^[\x20-\x7E]$/.test(char) && !/[A-Za-z0-9]/.test(char);
+  return /^[\x20-\x7E]$/.test(char) && !/[A-Za-z0-9]/.test(char)
 }

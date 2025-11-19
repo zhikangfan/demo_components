@@ -2,39 +2,39 @@ const props = {
   text: String,
   filledNumber: {
     type: Number,
-    default: 1
+    default: 1,
   },
   unfilledNumber: {
     type: Number,
-    default: 0
+    default: 0,
   },
   filledColor: {
     type: String,
-    default: '#000'
+    default: '#000',
   },
   unfilledColor: {
     type: String,
-    default: '#cbcfd6'
+    default: '#cbcfd6',
   },
   fontSize: {
     type: Number,
-    default: 24
+    default: 24,
   },
   letterSpacing: {
     type: Number,
-    default: 0
+    default: 0,
   },
   height: {
     type: Number,
-    default: 38 // 单位：mm
+    default: 38, // 单位：mm
   },
   lineHeight: {
     type: Number,
-    default: 140
+    default: 140,
   },
   fontFamily: {
     type: String,
-    default: 'Yuanti SC'
+    default: 'Yuanti SC',
   },
   outerLine: {
     type: Object,
@@ -64,7 +64,7 @@ const props = {
         strokeWidth: '1',
         strokeDasharray: 0,
       }
-    }
-  }
+    },
+  },
 }
 export default props

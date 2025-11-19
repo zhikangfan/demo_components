@@ -58,46 +58,41 @@ const props = defineProps({
 
 <template>
   <div :class="ss.pager">
+    <!--    <PinyinTable-->
+    <!--      :content="['a', 'b']"-->
+    <!--      :unfilled-rows="2"-->
+    <!--      line-spacing="10"-->
+    <!--      :filled-number="2"-->
+    <!--      :unfilled-number="8"-->
+    <!--      filled-color="red"-->
+    <!--      unfilled-color="blue"-->
+    <!--      letter-spacing="40"-->
+    <!--      line-height="140"-->
+    <!--      font-size="24"-->
+    <!--      height="15"-->
+    <!--      :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
+    <!--      :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
+    <!--      :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
+    <!--    />-->
 
-<!--    <PinyinTable-->
-<!--      :content="['a', 'b']"-->
-<!--      :unfilled-rows="2"-->
-<!--      line-spacing="10"-->
-<!--      :filled-number="2"-->
-<!--      :unfilled-number="8"-->
-<!--      filled-color="red"-->
-<!--      unfilled-color="blue"-->
-<!--      letter-spacing="40"-->
-<!--      line-height="140"-->
-<!--      font-size="24"-->
-<!--      height="15"-->
-<!--      :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
-<!--      :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
-<!--      :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
-<!--    />-->
+    <!--    <ChineseTable-->
+    <!--      :content="['中', '，', '', '国']"-->
+    <!--      :chinese-size="10"-->
+    <!--      :pinyin-height="8"-->
+    <!--      :unfilled-rows="2"-->
+    <!--      :show-pinyin="true"-->
+    <!--      :show-chinese-stroke="true"-->
+    <!--      :line-spacing="10"-->
+    <!--      :chinese-stroke-size="6"-->
+    <!--    />-->
 
-
-
-
-
-<!--    <ChineseTable-->
-<!--      :content="['中', '，', '', '国']"-->
-<!--      :chinese-size="10"-->
-<!--      :pinyin-height="8"-->
-<!--      :unfilled-rows="2"-->
-<!--      :show-pinyin="true"-->
-<!--      :show-chinese-stroke="true"-->
-<!--      :line-spacing="10"-->
-<!--      :chinese-stroke-size="6"-->
-<!--    />-->
-
-        <ChineseWordsTable
-          :content="['中', '国']"
-          :chinese-size="10"
-          :pinyin-height="8"
-          :unfilled-rows="2"
-          :show-pinyin="true"
-          :line-spacing="10"
-        />
+    <ChineseWordsTable
+      :content="['中', '国']"
+      :chinese-size="10"
+      :pinyin-height="8"
+      :unfilled-rows="2"
+      :show-pinyin="true"
+      :line-spacing="10"
+    />
   </div>
 </template>

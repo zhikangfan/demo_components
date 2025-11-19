@@ -5,7 +5,7 @@
       v-if="props.showChineseStroke"
     >
       <div
-        :class="{'pinyinBox': true, 'normal': !localPinyinProps.text}"
+        :class="{ pinyinBox: true, normal: !localPinyinProps.text }"
         :style="{ width: cellWidth + 'px' }"
         v-if="props.showPinyin"
         @click="handleOpen"
@@ -64,12 +64,7 @@
             </div>
           </div>
         </template>
-        <Form
-          :model="pinyinForm"
-          layout="vertical"
-          name="basic"
-          autocomplete="off"
-        >
+        <Form :model="pinyinForm" layout="vertical" name="basic" autocomplete="off">
           <FormItem name="status">
             <RadioGroup v-model:value="pinyinForm.status" @change="onChange">
               <Radio value="block">留空</Radio>
@@ -105,15 +100,7 @@
   </div>
 </template>
 <script setup>
-import {
-  Modal,
-  Card,
-  Form,
-  FormItem,
-  Input,
-  RadioGroup,
-  Radio,
-} from 'ant-design-vue'
+import { Modal, Card, Form, FormItem, Input, RadioGroup, Radio } from 'ant-design-vue'
 import { computed, ref, onMounted, onBeforeUnmount, reactive } from 'vue'
 import ss from '@/views/HomeView/index.module.less'
 import Pinyin from '@/components/Pinyin/index.vue'

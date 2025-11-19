@@ -1,13 +1,13 @@
 <template>
-  <div class="pinyinTable" :style="{gap: `${props.lineSpacing}mm`}">
-    <PinyinRow v-for="(row, index) in rows" :key="index"  v-bind="row"/>
+  <div class="pinyinTable" :style="{ gap: `${props.lineSpacing}mm` }">
+    <PinyinRow v-for="(row, index) in rows" :key="index" v-bind="row" />
   </div>
 </template>
 <script setup>
-import {computed} from 'vue'
-import PinyinRow from "@/components/PinyinRow/index.vue";
+import { computed } from 'vue'
+import PinyinRow from '@/components/PinyinRow/index.vue'
 import pinyinRowProps from '@/components/PinyinRow/props.js'
-const {lineSpacing, unfilledRows, content, position, size, padding, ...otherProps} = defineProps({
+const { lineSpacing, unfilledRows, content, position, size, padding, ...otherProps } = defineProps({
   ...pinyinRowProps,
   position: {
     type: Object,
@@ -16,7 +16,7 @@ const {lineSpacing, unfilledRows, content, position, size, padding, ...otherProp
         x: 0, // 最大12
         y: 8, // 默认 *5mm
       }
-    }
+    },
   },
   size: {
     type: Object,
@@ -25,7 +25,7 @@ const {lineSpacing, unfilledRows, content, position, size, padding, ...otherProp
         width: 12, // 最大12
         height: 47, // 默认 *5mm
       }
-    }
+    },
   },
   padding: {
     type: Object,
@@ -36,43 +36,42 @@ const {lineSpacing, unfilledRows, content, position, size, padding, ...otherProp
         bottom: 0,
         left: 0,
       }
-    }
+    },
   },
-  content: { // 文本内容
+  content: {
+    // 文本内容
     type: Array,
     default() {
       return []
-    }
+    },
   },
-  unfilledRows: { // 空行数量
+  unfilledRows: {
+    // 空行数量
     type: Number,
-    default: 1
+    default: 1,
   },
   lineSpacing: {
     type: Number,
-    default: 0
+    default: 0,
   },
 })
 
 const rows = computed(() => {
-  return content.flatMap((text) => {
-    return [
-      text,
-      ...new Array(unfilledRows).fill('')
-      ]
-  }).map(text => {
-    return {
-      ...otherProps,
-      text: text,
-    }
-  })
+  return content
+    .flatMap((text) => {
+      return [text, ...new Array(unfilledRows).fill('')]
+    })
+    .map((text) => {
+      return {
+        ...otherProps,
+        text: text,
+      }
+    })
 })
-
 </script>
 <style scoped lang="less">
 .pinyinTable {
   display: flex;
   flex-direction: column;
 }
-
 </style>

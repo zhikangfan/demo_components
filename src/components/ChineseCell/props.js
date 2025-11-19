@@ -71,5 +71,5 @@ export default {
   cellWidth: {
     type: Number,
     default: 0,
-  }
+  },
 }
