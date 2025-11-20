@@ -44,6 +44,9 @@ importers:
       pinyin-pro:
         specifier: ^3.27.0
         version: 3.27.0
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -2115,6 +2118,9 @@ packages:
 
   prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+
+  pubsub-js@1.9.5:
+    resolution: {integrity: sha512-5MZ0I9i5JWVO7SizvOviKvZU2qaBbl2KQX150FAA+fJBwYpwOUId7aNygURWSdPzlsA/xZ/InUKXqBbzM0czTA==}
 
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
@@ -4531,6 +4537,8 @@ snapshots:
 
   prr@1.0.1:
     optional: true
+
+  pubsub-js@1.9.5: {}
 
   punycode@2.3.1: {}
 

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useTemplateRef } from 'vue'
+import { computed, useTemplateRef, ref } from 'vue'
 import ChineseCell from '@/components/ChineseCell/index.vue'
 import PinyinRow from '@/components/PinyinRow/index.vue'
 import PinyinTable from '@/components/PinyinTable/index.vue'
@@ -7,6 +7,8 @@ import ChineseTable from '@/components/ChineseTable/index.vue'
 import ss from './index.module.less'
 import ChineseWordsRow from '@/components/ChineseWordsRow/ChineseWordsRow.vue'
 import ChineseWordsTable from '@/components/ChineseWordsTable/ChineseWordsTable.vue'
+import PinyinEditorModal from "@/components/PinyinEditorModal.vue";
+import ChineseParagraphTable from "@/components/ChineseParagraphTable/ChineseParagraphTable.vue";
 const props = defineProps({
   text: {
     type: String,
@@ -54,10 +56,20 @@ const props = defineProps({
     },
   },
 })
+const open = ref(false)
+const handleCancel = () => {
+  open.value = false
+}
+const handleOk = (value) => {
+  console.log(value, '----edit')
+  open.value = false;
+}
+
 </script>
 
 <template>
   <div :class="ss.pager">
+
     <!--    <PinyinTable-->
     <!--      :content="['a', 'b']"-->
     <!--      :unfilled-rows="2"-->
@@ -75,22 +87,32 @@ const props = defineProps({
     <!--      :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
     <!--    />-->
 
-    <!--    <ChineseTable-->
-    <!--      :content="['中', '，', '', '国']"-->
-    <!--      :chinese-size="10"-->
-    <!--      :pinyin-height="8"-->
-    <!--      :unfilled-rows="2"-->
-    <!--      :show-pinyin="true"-->
-    <!--      :show-chinese-stroke="true"-->
-    <!--      :line-spacing="10"-->
-    <!--      :chinese-stroke-size="6"-->
-    <!--    />-->
+<!--        <ChineseTable-->
+<!--          :content="['中', '，', '', '国']"-->
+<!--          :chinese-size="10"-->
+<!--          :pinyin-height="8"-->
+<!--          :unfilled-rows="2"-->
+<!--          :show-pinyin="true"-->
+<!--          :show-chinese-stroke="true"-->
+<!--          :line-spacing="10"-->
+<!--          :chinese-stroke-size="6"-->
+<!--        />-->
 
-    <ChineseWordsTable
-      :content="['中', '国']"
+<!--    <ChineseWordsTable-->
+<!--      :content="['中国', '美国']"-->
+<!--      :chinese-size="10"-->
+<!--      :unfilled-number="2"-->
+<!--      :pinyin-height="8"-->
+<!--      :unfilled-rows="2"-->
+<!--      :show-pinyin="true"-->
+<!--      :line-spacing="10"-->
+<!--    />-->
+    <ChineseParagraphTable
+      :content="['中国，啊',' ', '你好啊']"
       :chinese-size="10"
+      :unfilled-number="2"
       :pinyin-height="8"
-      :unfilled-rows="2"
+      :unfilled-rows="1"
       :show-pinyin="true"
       :line-spacing="10"
     />
