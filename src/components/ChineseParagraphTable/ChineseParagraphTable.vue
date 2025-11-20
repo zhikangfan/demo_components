@@ -40,7 +40,7 @@ import ChineseWordsRow from '@/components/ChineseWordsRow/ChineseWordsRow.vue'
 import ChineseWordsRowProps from '@/components/ChineseWordsRow/props.js'
 import { computed, watchEffect, ref } from 'vue'
 import { pinyin } from 'pinyin-pro'
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 const {
   content,
   unfilledRows,
@@ -77,7 +77,7 @@ const {
 const emit = defineEmits(['ok', 'cancel', 'afterClose'])
 
 const handleOk = (args) => {
-  const {cell, value} = args;
+  const { cell, value } = args
   for (let i = 0; i < rows.value.length; i++) {
     const row = rows.value[i]
     for (let k = 0; k < row.words.wordsInfo.length; k++) {

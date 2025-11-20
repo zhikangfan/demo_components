@@ -6,8 +6,8 @@ export default {
     type: Object,
     default() {
       return {
-        words: "",
-        wordsInfo: []
+        words: '',
+        wordsInfo: [],
       }
     },
   },
@@ -33,6 +33,6 @@ export default {
   },
   canEditRow: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 }

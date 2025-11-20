@@ -75,5 +75,5 @@ export default {
   canEdit: {
     type: Boolean,
     default: false,
-  }
+  },
 }

@@ -51,14 +51,18 @@
       :pinyin="props.pinyinProps.text"
       :chinese="props.chineseProps.text"
       title="编辑"
-      @ok="(value) => {
-        open = false
-        handleOk(value, cells[0], 0)
-      }"
-      @cancel="() => {
-        open = false
-        handleCancel(cells[0], 0)
-      }"
+      @ok="
+        (value) => {
+          open = false
+          handleOk(value, cells[0], 0)
+        }
+      "
+      @cancel="
+        () => {
+          open = false
+          handleCancel(cells[0], 0)
+        }
+      "
       @afterClose="() => handleAfterClose(cells[0], 0)"
       cancelText="取消"
       okText="确定"
@@ -112,10 +116,7 @@ const cells = computed(() => {
       groupId: props.word.id,
       pinyinProps: {
         ...props.pinyinProps,
-        text:
-          idx < props.filledNumber + props.unfilledNumber
-            ? props.pinyinProps.text
-            : '',
+        text: idx < props.filledNumber + props.unfilledNumber ? props.pinyinProps.text : '',
         color: idx === 0 ? props.filledColor : props.unfilledColor,
       },
       chineseProps: {

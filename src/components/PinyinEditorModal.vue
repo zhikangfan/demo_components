@@ -3,7 +3,9 @@
   <Modal v-bind:$attrs @ok="handleOk" @afterClose="afterClose">
     <Card>
       <template #title>
-        <div style="display: flex; align-items: center; gap: 8px; font-size: 20px; line-height: 28px">
+        <div
+          style="display: flex; align-items: center; gap: 8px; font-size: 20px; line-height: 28px"
+        >
           <div>{{ props.chinese }}</div>
           <div v-if="pinyinForm.status !== 'block'">
             {{ pinyinForm.status !== 'custom' ? pinyinForm.status : pinyinForm.custom }}
@@ -46,11 +48,11 @@ import { Modal, Card, Form, FormItem, Input, RadioGroup, Radio } from 'ant-desig
 import { pinyin as Pinyin } from 'pinyin-pro'
 const props = defineProps({
   chinese: {
-    type: String
+    type: String,
   },
   pinyin: {
-    type: String
-  }
+    type: String,
+  },
 })
 const attrs = useAttrs()
 const emit = defineEmits(['update:pinyin', 'ok', 'afterClose'])
@@ -66,7 +68,6 @@ const yinbiao = ref([
   ['ǖ', 'ǘ', 'ǚ', 'ǜ'],
 ])
 
-
 const options = ref([])
 
 const pinyinForm = reactive({
@@ -76,7 +77,7 @@ const pinyinForm = reactive({
 
 watchEffect(() => {
   if (attrs.open) {
-    chineseInfo.value = Pinyin(props.chinese, {type: 'all'})?.[0]
+    chineseInfo.value = Pinyin(props.chinese, { type: 'all' })?.[0]
     const isInOptions = chineseInfo.value?.polyphonic?.includes?.(props.pinyin)
     options.value = chineseInfo.value?.polyphonic
     pinyinForm.status = isInOptions ? props.pinyin : 'custom'
@@ -96,9 +97,13 @@ const handleYinbiaoClick = (yinbiaoChar) => {
 
 const handleOk = () => {
   const result =
-    pinyinForm.status === 'block' ? '' : pinyinForm.status === 'custom' ? pinyinForm.custom : pinyinForm.status
-    emit('update:pinyin', result)
-    emit('ok', result)
+    pinyinForm.status === 'block'
+      ? ''
+      : pinyinForm.status === 'custom'
+        ? pinyinForm.custom
+        : pinyinForm.status
+  emit('update:pinyin', result)
+  emit('ok', result)
 }
 
 const afterClose = () => {
