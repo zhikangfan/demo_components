@@ -1,16 +1,49 @@
 <template>
   <div class="chineseTable" :style="{ gap: `${finalLineSpacing}px` }">
-    <ChineseRow v-for="(row, idx) in rows" :key="idx" v-bind="row" />
+    <ChineseRow
+      v-for="(row, idx) in rows"
+      :key="idx"
+      v-bind="row"
+      @ok="
+        (value, cell, columnIndex) =>
+          handleOk({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+            value: value,
+          })
+      "
+      @cancel="
+        (cell, columnIndex) =>
+          handleCancel({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+          })
+      "
+      @after-close="
+        (cell, columnIndex) =>
+          handleAfterClose({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+          })
+      "
+    />
   </div>
 </template>
 <script setup>
-import { pinyin, polyphonic } from 'pinyin-pro'
+import { pinyin } from 'pinyin-pro'
 import HanziWriter from 'hanzi-writer'
 import ChineseRow from '@/components/ChineseRow/ChineseRow.vue'
 import ChineseRowProps from '@/components/ChineseRow/props.js'
 import { computed, watchEffect, ref } from 'vue'
 import { isChinese } from '@/utils/reg.js'
-
+import { v4 as uuidv4 } from 'uuid'
+const emit = defineEmits(['ok', 'cancel', 'afterClose'])
 const {
   content,
   unfilledRows,
@@ -47,6 +80,23 @@ const {
     default: 0,
   },
 })
+const handleOk = (args) => {
+  const { cell, value } = args
+  for (let i = 0; i < rows.value.length; i++) {
+    if (rows.value[i]?.word?.id === cell.groupId) {
+      rows.value[i].chineseProps.pinyin = value
+      rows.value[i].pinyinProps.text = value
+    }
+  }
+  emit('ok', args)
+}
+const handleCancel = (args) => {
+  emit('cancel', args)
+}
+const handleAfterClose = (args) => {
+  emit('afterClose', args)
+}
+
 const getValue = (params) => {
   const value = params * 3.8
   const decimalPart = value - Math.floor(value)
@@ -86,27 +136,39 @@ const getWriter = async (text, size) => {
 }
 const rows = ref([])
 watchEffect(async () => {
-  const origin = content.flatMap((text) => {
+  const task = await Promise.allSettled(content.map((text) => getWriter(text, 23)))
+  const data = content.map((word, idx) => {
+    const info = pinyin(word, { type: 'all' })[0]
+    return {
+      word: word,
+      info: info,
+      pinyin: info?.pinyin,
+      chinese: word,
+      strokes: task[idx].value,
+      id: uuidv4(),
+    }
+  })
+  const origin = data.flatMap((text) => {
     return [text, ...new Array(unfilledRows).fill('')]
   })
-  const task = await Promise.allSettled(origin.map((text) => getWriter(text, 23)))
-  rows.value = origin.map((text, idx) => {
-    const pinyinText = text ? pinyin(text, { nonZh: 'removed' }) : ''
+
+  rows.value = origin.map((word) => {
     return {
       ...otherProps,
-      chineseStrokes: task[idx].value,
+      word: word || {},
+      chineseStrokes: word?.strokes,
       chineseStrokeSize: getValue(chineseStrokeSize),
       chineseProps: {
         ...otherProps.chineseProps,
         size: getValue(chineseSize),
-        text: text,
-        pinyin: pinyinText,
-        polyphonic: text ? polyphonic(text, { type: 'array', nonZh: 'removed' })?.[0] : [],
+        text: word?.word,
+        pinyin: word?.pinyin,
+        polyphonic: word?.info?.polyphonic || [],
       },
       pinyinProps: {
         ...otherProps.pinyinProps,
         height: getValue(pinyinHeight),
-        text: pinyinText,
+        text: word?.pinyin,
       },
     }
   })

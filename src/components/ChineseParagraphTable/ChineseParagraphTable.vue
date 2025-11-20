@@ -1,19 +1,46 @@
 <template>
   <div class="chineseParagraphTable" :style="{ gap: `${finalLineSpacing}px` }">
-    <ChineseWordsRow v-for="(row, idx) in rows" :key="idx"
-                     @ok="(value, cells, columnIndex) => handleOk(value, cells, row, columnIndex, idx)"
-                     @cancel="(cells, columnIndex) => handleCancel(cells, row, columnIndex, idx)"
-                     @afterClose="(cells, columnIndex) => handleAfterClose(cells, row, columnIndex, idx)"
-                     v-bind="row"/>
+    <ChineseWordsRow
+      v-for="(row, idx) in rows"
+      :key="idx"
+      @ok="
+        (value, cell, columnIndex) =>
+          handleOk({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+            value: value,
+          })
+      "
+      @cancel="
+        (cell, columnIndex) =>
+          handleCancel({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+          })
+      "
+      @after-close="
+        (cell, columnIndex) =>
+          handleAfterClose({
+            cell: cell,
+            columnIndex,
+            row: row,
+            rowIndex: idx,
+          })
+      "
+      v-bind="row"
+    />
   </div>
 </template>
 <script setup>
 import ChineseWordsRow from '@/components/ChineseWordsRow/ChineseWordsRow.vue'
 import ChineseWordsRowProps from '@/components/ChineseWordsRow/props.js'
-import {computed, watchEffect, ref} from 'vue'
-import PubSub from 'pubsub-js'
-import ChineseCell from "@/components/ChineseCell/index.vue";
-
+import { computed, watchEffect, ref } from 'vue'
+import { pinyin } from 'pinyin-pro'
+import {v4 as uuidv4} from 'uuid'
 const {
   content,
   unfilledRows,
@@ -22,48 +49,51 @@ const {
   pinyinHeight,
   unfilledNumber,
   ...otherProps
-} =
-  defineProps({
-    ...ChineseWordsRowProps,
-    content: {
-      type: Array,
-      default: () => [],
-    },
-    unfilledRows: {
-      // 空行数量
-      type: Number,
-      default: 1,
-    },
-    chineseSize: {
-      type: Number,
-      default: 10,
-    },
-    pinyinHeight: {
-      type: Number,
-      default: 8,
-    },
-    lineSpacing: {
-      type: Number,
-      default: 0,
-    },
-  })
+} = defineProps({
+  ...ChineseWordsRowProps,
+  content: {
+    type: Array,
+    default: () => [],
+  },
+  unfilledRows: {
+    // 空行数量
+    type: Number,
+    default: 1,
+  },
+  chineseSize: {
+    type: Number,
+    default: 10,
+  },
+  pinyinHeight: {
+    type: Number,
+    default: 8,
+  },
+  lineSpacing: {
+    type: Number,
+    default: 0,
+  },
+})
 
 const emit = defineEmits(['ok', 'cancel', 'afterClose'])
 
-const handleOk = (value, cell, row, columnIndex, rowIndex) => {
-  PubSub.publish('ParagraphTableMessage', {
-    type: 'editPinyin',
-    rowIndex: rowIndex,
-    columnIndex: columnIndex,
-    value: value,
-  });
-  emit('ok', value, cell, columnIndex, rowIndex)
+const handleOk = (args) => {
+  const {cell, value} = args;
+  for (let i = 0; i < rows.value.length; i++) {
+    const row = rows.value[i]
+    for (let k = 0; k < row.words.wordsInfo.length; k++) {
+      const wordsInfo = row.words.wordsInfo[k]
+      if (wordsInfo.id === cell.groupId) {
+        rows.value[i].words.wordsInfo[k].pinyin = value
+      }
+    }
+  }
+  emit('ok', args)
 }
-const handleCancel = (cell, row, columnIndex, rowIndex) => {
-  emit('cancel', cell, columnIndex, rowIndex)
+const handleCancel = (args) => {
+  emit('cancel', args)
 }
-const handleAfterClose = (cell, row, columnIndex, rowIndex) => {
-  emit('afterClose', cell, row, columnIndex, rowIndex)
+const handleAfterClose = (args) => {
+  emit('afterClose', args)
 }
 
 const getValue = (params) => {
@@ -86,12 +116,26 @@ const finalLineSpacing = computed(() => {
 })
 const rows = ref([])
 watchEffect(async () => {
-
-  const origin = content.flatMap((text) => {
-    const unfilledTextArr = new Array(unfilledNumber).fill(text)
+  const data = content.map((words) => {
+    const info = pinyin(words, { type: 'all' })
+    const wordsInfo = words.split('').map((word, idx) => {
+      return {
+        pinyin: info[idx].pinyin,
+        chinese: word,
+        info: info,
+        id: uuidv4(),
+      }
+    })
+    return {
+      words: words,
+      wordsInfo: wordsInfo,
+    }
+  })
+  const origin = data.flatMap((item) => {
+    const unfilledTextArr = new Array(unfilledNumber).fill(item)
     const unfilledRowsArr = new Array(unfilledRows).fill('')
     // 这里的顺序就决定了渲染顺序
-    return [text, ...unfilledTextArr, ...unfilledRowsArr]
+    return [item, ...unfilledTextArr, ...unfilledRowsArr]
   })
 
   const spaceNum = unfilledNumber + unfilledRows + 1
@@ -101,7 +145,7 @@ watchEffect(async () => {
       ...otherProps,
       unfilledNumber: 0,
       words: text,
-      canEdit: idx % spaceNum === 0,
+      canEditRow: idx % spaceNum === 0,
       filledColor: idx % spaceNum === 0 ? otherProps.filledColor : otherProps.unfilledColor,
       chineseProps: {
         ...otherProps.chineseProps,

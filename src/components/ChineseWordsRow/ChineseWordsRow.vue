@@ -6,19 +6,17 @@
         :key="idx"
         :style="{ marginLeft: `${margin}px`, marginRight: `${margin}px` }"
         v-bind="cell"
-        @ok="(value) => handleOk(value, cells, idx)"
-        @cancel="() => handleCancel(cells, idx)"
-        @afterClose="() => handleAfterClose(cells, idx)"
+        @ok="(value) => handleOk(value, cell, idx)"
+        @cancel="() => handleCancel(cell, idx)"
+        @afterClose="() => handleAfterClose(cell, idx)"
       />
     </div>
   </div>
 </template>
 <script setup>
-import {computed, ref, onMounted, onBeforeUnmount, watchEffect} from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watchEffect } from 'vue'
 import ChineseCell from '@/components/ChineseCell/index.vue'
 import chineseWordsRowProps from '@/components/ChineseWordsRow/props.js'
-import {pinyin} from 'pinyin-pro'
-import PubSub from "pubsub-js";
 
 const {
   spacing,
@@ -28,6 +26,7 @@ const {
   filledNumber,
   unfilledNumber,
   unfilledColor,
+  canEditRow,
   ...otherProps
 } = defineProps(chineseWordsRowProps)
 const resizeObserver = ref(null)
@@ -42,7 +41,7 @@ const margin = computed(() => {
 })
 
 const handleOk = (value, cell, idx) => {
-  emit('ok', value, cell, idx )
+  emit('ok', value, cell, idx)
 }
 const handleCancel = (cell, idx) => {
   emit('cancel', cell, idx)
@@ -59,43 +58,37 @@ const cellWidth = computed(() => {
 const totalCell = computed(() => {
   return Math.floor(containerWidth.value / cellWidth.value)
 })
+
 watchEffect(() => {
   const totalCellArr = new Array(totalCell.value).fill('')
   let filledTextArr = [] // 填充单元格
   let unfilledTextArr = [] // 未填充单元格
-  const allPinyin = pinyin(words, {type: 'all'})
   for (let i = 0; i < filledNumber; i++) {
-    filledTextArr = [...filledTextArr, ...allPinyin]
+    filledTextArr = [...filledTextArr, ...words.wordsInfo]
   }
   for (let i = 0; i < unfilledNumber; i++) {
-    unfilledTextArr = [...unfilledTextArr, ...allPinyin]
+    unfilledTextArr = [...unfilledTextArr, ...words.wordsInfo]
   }
   const allText = [...filledTextArr, ...unfilledTextArr]
   cells.value = totalCellArr.map((text, idx) => {
     return {
       ...otherProps,
+      groupId: allText[idx]?.id,
       pinyinProps: {
         ...otherProps.pinyinProps,
         text: allText[idx]?.pinyin || '',
         color: idx < filledTextArr.length ? filledColor : unfilledColor,
       },
+      canEdit: canEditRow && idx < filledTextArr.length,
       chineseProps: {
         ...otherProps.chineseProps,
-        text: allText[idx]?.origin,
+        text: allText[idx]?.chinese,
         color: idx < filledTextArr.length ? filledColor : unfilledColor,
       },
       cellWidth: cellWidth.value,
       showPinyin: showPinyin,
-
     }
   })
-})
-// const cells = computed(() => {
-//
-// })
-
-watchEffect(() => {
-  console.log(cells.value, '---clells')
 })
 // 初始化容器宽度
 onMounted(() => {
@@ -111,30 +104,6 @@ onMounted(() => {
 
     resizeObserver.value.observe(containerRef.value)
   }
-
-  PubSub.subscribe('ParagraphTableMessage', (msg, data) => {
-    console.log(msg, data, '---sub')
-    if (data.type === 'editPinyin') {
-      // cells.value[data.columnIndex].pinyinProps.text = data.value
-      // cells.value.splice(data.columnIndex, 1, {
-      //   ...cells.value[data.columnIndex],
-      //   pinyinProps: {
-      //     ...cells.value[data.columnIndex].pinyinProps,
-      //     text: data.value,
-      //   },
-      // })
-
-      const newCells = [...cells.value];
-      newCells[data.columnIndex] = {
-        ...newCells[data.columnIndex],
-        pinyinProps: {
-          ...newCells[data.columnIndex].pinyinProps,
-          text: data.value,
-        },
-      };
-      cells.value = newCells; // 替换整个数组以确保响应性
-    }
-  });
 })
 onBeforeUnmount(() => {
   if (resizeObserver.value) {

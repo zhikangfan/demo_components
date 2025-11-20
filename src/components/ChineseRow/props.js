@@ -37,4 +37,10 @@ export default {
     type: String,
     default: '#cbcfd6',
   },
+  word: Object,
+  info: Object,
+  pinyin: String,
+  chinese: String,
+  strokes: Array,
+  id: String,
 }

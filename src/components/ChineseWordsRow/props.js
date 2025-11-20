@@ -3,7 +3,13 @@ import ChineseCellProps from '@/components/ChineseCell/props.js'
 export default {
   ...ChineseCellProps,
   words: {
-    type: String,
+    type: Object,
+    default() {
+      return {
+        words: "",
+        wordsInfo: []
+      }
+    },
   },
   spacing: {
     type: Number,
@@ -25,4 +31,8 @@ export default {
     type: String,
     default: '#cbcfd6',
   },
+  canEditRow: {
+    type: Boolean,
+    default: false
+  }
 }

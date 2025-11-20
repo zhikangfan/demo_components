@@ -1,5 +1,5 @@
 <template>
-  <div class="pinyinTable" :style="{ gap: `${props.lineSpacing}mm` }">
+  <div class="pinyinTable" :style="{ gap: `${lineSpacing}mm` }">
     <PinyinRow v-for="(row, index) in rows" :key="index" v-bind="row" />
   </div>
 </template>
