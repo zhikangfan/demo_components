@@ -11,6 +11,7 @@ import PinyinEditorModal from '@/components/PinyinEditorModal.vue'
 import ChineseParagraphTable from '@/components/ChineseParagraphTable/ChineseParagraphTable.vue'
 import ChineseStrokeTable from '@/components/ChineseStrokeTable/ChineseStrokeTable.vue'
 import EnglishWordTable from '@/components/EnglishWordTable/EnglishWordTable.vue'
+import EnglishParagraphTable from '@/components/EnglishParagraphTable.vue'
 
 const props = defineProps({
   text: {
@@ -77,19 +78,19 @@ const width = ref(716)
   <div :class="ss.pager" :style="{ width: width + 'px' }">
     <!--        <PinyinTable-->
     <!--          :content="['a', 'b']"-->
-    <!--          :unfilled-rows="2"-->
-    <!--          line-spacing="10"-->
-    <!--          :filled-number="2"-->
-    <!--          :unfilled-number="8"-->
-    <!--          filled-color="red"-->
-    <!--          unfilled-color="blue"-->
-    <!--          letter-spacing="40"-->
-    <!--          line-height="140"-->
-    <!--          font-size="24"-->
-    <!--          height="15"-->
-    <!--          :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
-    <!--          :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
-    <!--          :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
+    <!--              :unfilled-rows="2"-->
+    <!--              line-spacing="10"-->
+    <!--              :filled-number="2"-->
+    <!--              :unfilled-number="8"-->
+    <!--              filled-color="red"-->
+    <!--              unfilled-color="blue"-->
+    <!--              letter-spacing="40"-->
+    <!--              line-height="140"-->
+    <!--              font-size="24"-->
+    <!--              height="15"-->
+    <!--              :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
+    <!--              :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
+    <!--              :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
     <!--        />-->
 
     <!--            <ChineseTable-->
@@ -136,16 +137,28 @@ const width = ref(716)
     <!--      :scale="80"-->
     <!--    />-->
 
-    <EnglishWordTable
-      :content="['One:一', 'Two:二']"
-      :show-phonetic="true"
-      :show-chinese="true"
-      :margin="1"
-      :height="10"
-      :unfilled-rows="1"
-      :filled-number="5"
-      :unfilled-number="2"
-      :line-spacing="8"
-    />
+    <!--    <EnglishWordTable-->
+    <!--      :content="['One:一', 'Two:二']"-->
+    <!--      :show-phonetic="true"-->
+    <!--      :show-chinese="true"-->
+    <!--      :margin="1"-->
+    <!--      :height="10"-->
+    <!--      :unfilled-rows="1"-->
+    <!--      :filled-number="5"-->
+    <!--      :unfilled-number="2"-->
+    <!--      :line-spacing="8"-->
+    <!--    />-->
+
+    <!--    <EnglishParagraphTable-->
+    <!--      :content="['How are you', 'I am fine']"-->
+    <!--      :unfilled-rows="2"-->
+    <!--      :unfilled-number="2"-->
+    <!--      :line-spacing="10"-->
+    <!--      :filled-number="2"-->
+    <!--      font-size="24"-->
+    <!--      height="10"-->
+    <!--      filled-color="rgb(255,0,0)"-->
+    <!--      unfilled-color="rgb(0,255,0)"-->
+    <!--    />-->
   </div>
 </template>

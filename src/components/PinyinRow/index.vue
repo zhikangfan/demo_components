@@ -34,6 +34,7 @@ const cells = computed(() => {
       style: {
         color: idx === 0 ? props.filledColor : props.unfilledColor,
         height: props.height + 'mm',
+        textAlign: props.align,
         borderLeft: `${props.splitLine.strokeWidth}px ${props.splitLine.strokeDashArray > 0 ? 'solid' : 'dashed'} ${props.splitLine.stroke}`,
       },
       text: idx <= props.filledNumber ? props.text : '',

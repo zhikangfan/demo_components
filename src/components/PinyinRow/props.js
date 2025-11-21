@@ -28,6 +28,10 @@ const props = {
     type: Number,
     default: 38, // 单位：mm
   },
+  align: {
+    type: String,
+    default: 'center',
+  },
   lineHeight: {
     type: Number,
     default: 140,
