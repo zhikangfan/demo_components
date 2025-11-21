@@ -10,6 +10,8 @@ import ChineseWordsTable from '@/components/ChineseWordsTable/ChineseWordsTable.
 import PinyinEditorModal from '@/components/PinyinEditorModal.vue'
 import ChineseParagraphTable from '@/components/ChineseParagraphTable/ChineseParagraphTable.vue'
 import ChineseStrokeTable from '@/components/ChineseStrokeTable/ChineseStrokeTable.vue'
+import EnglishWordTable from '@/components/EnglishWordTable/EnglishWordTable.vue'
+
 const props = defineProps({
   text: {
     type: String,
@@ -65,7 +67,7 @@ const handleOk = (value) => {
   console.log(value, '----edit')
   open.value = false
 }
-const width = ref(200)
+const width = ref(716)
 // setInterval(() => {
 //   width.value -= 20
 // }, 1000)
@@ -121,17 +123,29 @@ const width = ref(200)
     <!--      :line-spacing="10"-->
     <!--    />-->
 
-    <ChineseStrokeTable
-      :content="['中']"
-      :chinese-size="10"
-      :pinyin-height="8"
-      :unfilled-rows="0"
+    <!--    <ChineseStrokeTable-->
+    <!--      :content="['中']"-->
+    <!--      :chinese-size="10"-->
+    <!--      :pinyin-height="8"-->
+    <!--      :unfilled-rows="0"-->
+    <!--      :unfilled-number="2"-->
+    <!--      :show-pinyin="true"-->
+    <!--      :show-chinese-stroke="false"-->
+    <!--      :line-spacing="10"-->
+    <!--      :chinese-stroke-size="10"-->
+    <!--      :scale="80"-->
+    <!--    />-->
+
+    <EnglishWordTable
+      :content="['One:一', 'Two:二']"
+      :show-phonetic="true"
+      :show-chinese="true"
+      :margin="1"
+      :height="10"
+      :unfilled-rows="1"
+      :filled-number="5"
       :unfilled-number="2"
-      :show-pinyin="true"
-      :show-chinese-stroke="false"
-      :line-spacing="10"
-      :chinese-stroke-size="10"
-      :scale="80"
+      :line-spacing="8"
     />
   </div>
 </template>
