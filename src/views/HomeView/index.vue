@@ -9,6 +9,7 @@ import ChineseWordsRow from '@/components/ChineseWordsRow/ChineseWordsRow.vue'
 import ChineseWordsTable from '@/components/ChineseWordsTable/ChineseWordsTable.vue'
 import PinyinEditorModal from '@/components/PinyinEditorModal.vue'
 import ChineseParagraphTable from '@/components/ChineseParagraphTable/ChineseParagraphTable.vue'
+import ChineseStrokeTable from '@/components/ChineseStrokeTable/ChineseStrokeTable.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -64,10 +65,14 @@ const handleOk = (value) => {
   console.log(value, '----edit')
   open.value = false
 }
+const width = ref(200)
+// setInterval(() => {
+//   width.value -= 20
+// }, 1000)
 </script>
 
 <template>
-  <div :class="ss.pager">
+  <div :class="ss.pager" :style="{ width: width + 'px' }">
     <!--        <PinyinTable-->
     <!--          :content="['a', 'b']"-->
     <!--          :unfilled-rows="2"-->
@@ -85,27 +90,27 @@ const handleOk = (value) => {
     <!--          :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
     <!--        />-->
 
-    <!--        <ChineseTable-->
-    <!--          :content="['中', '，', '', '国']"-->
+    <!--            <ChineseTable-->
+    <!--              :content="['中', '，', '', '国']"-->
+    <!--              :chinese-size="10"-->
+    <!--              :pinyin-height="8"-->
+    <!--              :unfilled-rows="2"-->
+    <!--              :unfilled-number="2"-->
+    <!--              :show-pinyin="true"-->
+    <!--              :show-chinese-stroke="true"-->
+    <!--              :line-spacing="10"-->
+    <!--              :chinese-stroke-size="6"-->
+    <!--            />-->
+
+    <!--        <ChineseWordsTable-->
+    <!--          :content="['中国', '美国']"-->
     <!--          :chinese-size="10"-->
+    <!--          :unfilled-number="2"-->
     <!--          :pinyin-height="8"-->
     <!--          :unfilled-rows="2"-->
-    <!--          :unfilled-number="2"-->
     <!--          :show-pinyin="true"-->
-    <!--          :show-chinese-stroke="true"-->
     <!--          :line-spacing="10"-->
-    <!--          :chinese-stroke-size="6"-->
     <!--        />-->
-
-    <!--    <ChineseWordsTable-->
-    <!--      :content="['中国', '美国']"-->
-    <!--      :chinese-size="10"-->
-    <!--      :unfilled-number="2"-->
-    <!--      :pinyin-height="8"-->
-    <!--      :unfilled-rows="2"-->
-    <!--      :show-pinyin="true"-->
-    <!--      :line-spacing="10"-->
-    <!--    />-->
     <!--    <ChineseParagraphTable-->
     <!--      :content="['中国', '日本']"-->
     <!--      :chinese-size="10"-->
@@ -115,5 +120,18 @@ const handleOk = (value) => {
     <!--      :show-pinyin="true"-->
     <!--      :line-spacing="10"-->
     <!--    />-->
+
+    <ChineseStrokeTable
+      :content="['中']"
+      :chinese-size="10"
+      :pinyin-height="8"
+      :unfilled-rows="0"
+      :unfilled-number="2"
+      :show-pinyin="true"
+      :show-chinese-stroke="false"
+      :line-spacing="10"
+      :chinese-stroke-size="10"
+      :scale="80"
+    />
   </div>
 </template>

@@ -1,5 +1,6 @@
 import ChineseProps from '@/components/Chinese/props.js'
 import PinyinProps from '@/components/Pinyin/props.js'
+
 const ChineseDefaultProps = {
   text: '',
   pinyin: '',
@@ -67,6 +68,13 @@ export default {
   showPinyin: {
     type: Boolean,
     default: false,
+  },
+  showStroke: {
+    type: Boolean,
+    default: false,
+  },
+  stroke: {
+    type: String,
   },
   cellWidth: {
     type: Number,
