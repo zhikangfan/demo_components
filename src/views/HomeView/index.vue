@@ -12,7 +12,7 @@ import ChineseParagraphTable from '@/components/ChineseParagraphTable/ChinesePar
 import ChineseStrokeTable from '@/components/ChineseStrokeTable/ChineseStrokeTable.vue'
 import EnglishWordTable from '@/components/EnglishWordTable/EnglishWordTable.vue'
 import EnglishParagraphTable from '@/components/EnglishParagraphTable.vue'
-
+import VueDraggableResizable from 'vue-draggable-resizable'
 const props = defineProps({
   text: {
     type: String,
@@ -75,7 +75,7 @@ const width = ref(716)
 </script>
 
 <template>
-  <div :class="ss.pager" :style="{ width: width + 'px' }">
+  <div :class="ss.pager">
     <!--        <PinyinTable-->
     <!--          :content="['a', 'b']"-->
     <!--              :unfilled-rows="2"-->
@@ -105,15 +105,15 @@ const width = ref(716)
     <!--              :chinese-stroke-size="6"-->
     <!--            />-->
 
-    <!--        <ChineseWordsTable-->
-    <!--          :content="['中国', '美国']"-->
-    <!--          :chinese-size="10"-->
-    <!--          :unfilled-number="2"-->
-    <!--          :pinyin-height="8"-->
-    <!--          :unfilled-rows="2"-->
-    <!--          :show-pinyin="true"-->
-    <!--          :line-spacing="10"-->
-    <!--        />-->
+    <!--            <ChineseWordsTable-->
+    <!--              :content="['中国', '美国']"-->
+    <!--              :chinese-size="10"-->
+    <!--              :unfilled-number="2"-->
+    <!--              :pinyin-height="8"-->
+    <!--              :unfilled-rows="2"-->
+    <!--              :show-pinyin="true"-->
+    <!--              :line-spacing="10"-->
+    <!--            />-->
     <!--    <ChineseParagraphTable-->
     <!--      :content="['中国', '日本']"-->
     <!--      :chinese-size="10"-->
@@ -160,5 +160,19 @@ const width = ref(716)
     <!--      filled-color="rgb(255,0,0)"-->
     <!--      unfilled-color="rgb(0,255,0)"-->
     <!--    />-->
+
+    <vue-draggable-resizable :parent="true">
+      <div class="w-full h-full overflow-hidden">
+        <ChineseWordsTable
+          :content="['中国', '美国']"
+          :chinese-size="10"
+          :unfilled-number="2"
+          :pinyin-height="8"
+          :unfilled-rows="2"
+          :show-pinyin="true"
+          :line-spacing="10"
+        />
+      </div>
+    </vue-draggable-resizable>
   </div>
 </template>
