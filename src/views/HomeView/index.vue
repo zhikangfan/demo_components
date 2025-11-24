@@ -220,16 +220,16 @@ const width = ref(716)
     <!--    </vue-draggable-resizable>-->
     <!--    <vue-draggable-resizable :parent="true">-->
     <!--      <div class="w-full h-full overflow-hidden flex">-->
-    <!--        <Text-->
-    <!--          type="h3"-->
-    <!--          text="标题3"-->
-    <!--          font-size="16"-->
-    <!--          font-weight="bold"-->
-    <!--          font-style="normal"-->
-    <!--          text-decoration="none"-->
-    <!--          text-align="left"-->
-    <!--          color="#000000ff"-->
-    <!--        />-->
+    <!--            <Text-->
+    <!--              type="h3"-->
+    <!--              text="标题3"-->
+    <!--              font-size="16"-->
+    <!--              font-weight="bold"-->
+    <!--              font-style="normal"-->
+    <!--              text-decoration="none"-->
+    <!--              text-align="left"-->
+    <!--              color="#000000ff"-->
+    <!--            />-->
     <!--      </div>-->
     <!--    </vue-draggable-resizable>-->
     <!--    <vue-draggable-resizable :parent="true">-->
@@ -259,10 +259,10 @@ const width = ref(716)
     <!--      </div>-->
     <!--    </vue-draggable-resizable>-->
 
-    <vue-draggable-resizable :parent="true">
-      <div class="w-full h-full overflow-hidden flex">
-        <AdditionTable :show-answer="true" />
-      </div>
-    </vue-draggable-resizable>
+    <!--    <vue-draggable-resizable :parent="true" :resizeable="false" :draggable="false" width="auto">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <AdditionTable :show-answer="true" />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
   </div>
 </template>

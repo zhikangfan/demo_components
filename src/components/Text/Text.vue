@@ -1,5 +1,21 @@
 <template>
-  <div class="h-full w-full flex flex-col justify-center" type="edit">
+  <div
+    :class="[
+      'h-full',
+      'w-full',
+      'flex',
+      'flex-col',
+      'justify-center',
+      'bg-white',
+      'overflow-hidden',
+      'outline-1',
+      props.id === currentSelectWidget
+        ? 'outline-[#2FB36D]'
+        : 'cursor-grab active:cursor-grabbing hover:shadow-lg transition-shadow outline-white hover:outline-dashed hover:outline-1 hover:outline-zinc-300',
+    ]"
+    type="edit"
+    @click="() => props?.click?.()"
+  >
     <h1 v-if="props.type === 'h1'" class="whitespace-pre-wrap" :style="style">
       {{ props.text }}
     </h1>
@@ -21,9 +37,12 @@
   </div>
 </template>
 <script setup>
-import { defineProps, computed } from 'vue'
-
+import { defineProps, computed, ref, defineEmits } from 'vue'
+import { currentSelectWidget } from '@/hooks/useRefData.js'
 const props = defineProps({
+  id: {
+    type: String,
+  },
   type: {
     type: String,
     default: 'content', //  其它值：h1, h2, h3, content
@@ -59,6 +78,10 @@ const props = defineProps({
   textAlign: {
     type: String,
     default: 'left',
+  },
+  click: {
+    type: Function,
+    default: () => {},
   },
 })
 const style = computed(() => {

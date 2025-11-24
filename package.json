@@ -22,6 +22,7 @@
     "axios": "^1.9.0",
     "copy-to-clipboard": "^3.3.3",
     "element-plus": "^2.10.1",
+    "gridstack": "^12.3.3",
     "hanzi-writer": "^3.7.3",
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",

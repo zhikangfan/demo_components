@@ -1,11 +1,13 @@
 <template>
-  <div class="pinyinTable" :style="{ gap: `${lineSpacing}mm` }">
-    <EnglishWordRow
-      v-for="(row, idx) in rows"
-      :key="idx"
-      v-bind="row"
-      @ok="(phonetic) => handleEdit(phonetic, idx)"
-    />
+  <div class="relative w-full">
+    <div class="relative flex flex-col" :style="{ gap: `${lineSpacing}mm` }">
+      <EnglishWordRow
+        v-for="(row, idx) in rows"
+        :key="idx"
+        v-bind="row"
+        @ok="(phonetic) => handleEdit(phonetic, idx)"
+      />
+    </div>
   </div>
 </template>
 <script setup>

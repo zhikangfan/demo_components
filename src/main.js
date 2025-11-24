@@ -1,6 +1,8 @@
 import './assets/base.css'
 import 'ant-design-vue/dist/reset.css'
 import 'vue-draggable-resizable/style.css'
+import 'gridstack/dist/gridstack.min.css'
+import './assets/test.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
