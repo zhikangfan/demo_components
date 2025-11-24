@@ -13,6 +13,11 @@ import ChineseStrokeTable from '@/components/ChineseStrokeTable/ChineseStrokeTab
 import EnglishWordTable from '@/components/EnglishWordTable/EnglishWordTable.vue'
 import EnglishParagraphTable from '@/components/EnglishParagraphTable.vue'
 import VueDraggableResizable from 'vue-draggable-resizable'
+import InfoBar from '@/components/InfoBar/InfoBar.vue'
+import Text from '@/components/Text/Text.vue'
+import DecompositionTable from '@/components/DecompositionTable/DecompositionTable.vue'
+import DecompositionSubtractionTable from '@/components/DecompositionSubtractionTable/DecompositionSubtractionTable.vue'
+import AdditionTable from '@/components/additionTable/additionTable.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -161,17 +166,102 @@ const width = ref(716)
     <!--      unfilled-color="rgb(0,255,0)"-->
     <!--    />-->
 
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <InfoBar-->
+    <!--          :info="['班级', '姓名', '日期', '用时', '成绩', '学号', '身份证']"-->
+    <!--          direction="horizontal"-->
+    <!--          :sealing-line="{ show: true, invisible: false }"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <Text-->
+    <!--          type="content"-->
+    <!--          text="大标题"-->
+    <!--          font-size="24"-->
+    <!--          font-weight="bold"-->
+    <!--          font-style="normal"-->
+    <!--          text-decoration="none"-->
+    <!--          text-align="center"-->
+    <!--          color="#000000ff"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <Text-->
+    <!--          type="h1"-->
+    <!--          text="标题 1"-->
+    <!--          font-size="20"-->
+    <!--          font-weight="bold"-->
+    <!--          font-style="normal"-->
+    <!--          text-decoration="none"-->
+    <!--          text-align="left"-->
+    <!--          color="#000000ff"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <Text-->
+    <!--          type="h2"-->
+    <!--          text="标题2"-->
+    <!--          font-size="18"-->
+    <!--          font-weight="bold"-->
+    <!--          font-style="normal"-->
+    <!--          text-decoration="none"-->
+    <!--          text-align="left"-->
+    <!--          color="#000000ff"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <Text-->
+    <!--          type="h3"-->
+    <!--          text="标题3"-->
+    <!--          font-size="16"-->
+    <!--          font-weight="bold"-->
+    <!--          font-style="normal"-->
+    <!--          text-decoration="none"-->
+    <!--          text-align="left"-->
+    <!--          color="#000000ff"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <Text-->
+    <!--          type="content"-->
+    <!--          text="正文"-->
+    <!--          font-size="14"-->
+    <!--          font-weight="normal"-->
+    <!--          font-style="normal"-->
+    <!--          text-decoration="none"-->
+    <!--          text-align="left"-->
+    <!--          color="#000000ff"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+
+    <!--        <vue-draggable-resizable :parent="true">-->
+    <!--          <div class="w-full h-full overflow-hidden flex">-->
+    <!--            <DecompositionTable :show-answer="false"/>-->
+    <!--          </div>-->
+    <!--        </vue-draggable-resizable>-->
+
+    <!--    <vue-draggable-resizable :parent="true">-->
+    <!--      <div class="w-full h-full overflow-hidden flex">-->
+    <!--        <DecompositionSubtractionTable :show-answer="true" />-->
+    <!--      </div>-->
+    <!--    </vue-draggable-resizable>-->
+
     <vue-draggable-resizable :parent="true">
-      <div class="w-full h-full overflow-hidden">
-        <ChineseWordsTable
-          :content="['中国', '美国']"
-          :chinese-size="10"
-          :unfilled-number="2"
-          :pinyin-height="8"
-          :unfilled-rows="2"
-          :show-pinyin="true"
-          :line-spacing="10"
-        />
+      <div class="w-full h-full overflow-hidden flex">
+        <AdditionTable :show-answer="true" />
       </div>
     </vue-draggable-resizable>
   </div>
