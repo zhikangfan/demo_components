@@ -17,20 +17,20 @@
     <div
       :class="[
         'flex',
-        ' items-center',
+        'items-center',
         'justify-around',
         'gap-2',
         props.direction === 'vertical' && 'scale-[-1]',
         props.sealingLine.invisible && 'invisible',
       ]"
     >
-      <div class="flex-1 flex items-end gap-1" v-for="(info, idx) in props.info" :key="idx">
+      <div class="flex flex-1 items-end gap-1" v-for="(info, idx) in props.info" :key="idx">
         <div class="flex-shrink-0 transform">{{ info }}</div>
         <div
           :class="[
             'flex-1',
             'border-solid',
-            ' border-black',
+            'border-black',
             'w-4',
             'h-4',
             props.direction === 'vertical' ? 'border-l' : 'border-b',

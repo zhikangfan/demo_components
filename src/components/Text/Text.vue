@@ -11,10 +11,10 @@
       'outline-1',
       props.id === currentSelectWidget
         ? 'outline-[#2FB36D]'
-        : 'cursor-grab active:cursor-grabbing hover:shadow-lg transition-shadow outline-white hover:outline-dashed hover:outline-1 hover:outline-zinc-300',
+        : 'cursor-grab outline-white transition-shadow hover:shadow-lg hover:outline-1 hover:outline-zinc-300 hover:outline-dashed active:cursor-grabbing',
     ]"
     type="edit"
-    @click="() => props?.click?.()"
+    @click.stop="() => props?.click?.()"
   >
     <h1 v-if="props.type === 'h1'" class="whitespace-pre-wrap" :style="style">
       {{ props.text }}

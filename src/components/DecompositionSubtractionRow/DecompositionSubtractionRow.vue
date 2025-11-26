@@ -1,7 +1,7 @@
 <template>
-  <div class="p-1 relative group hover:bg-[#b9dccc]/20">
+  <div class="group relative p-1 hover:bg-[#b9dccc]/20">
     <div class="relative h-40">
-      <div class="flex items-center space-x-6 ml-8">
+      <div class="ml-8 flex items-center space-x-6">
         <span class="relative text-center">{{ props.first }}</span
         ><span class="relative text-center">-</span
         ><span class="relative text-center">{{ props.second }}</span
@@ -27,10 +27,10 @@
           >
         </div>
       </div>
-      <div class="absolute top-9 left-17 border-r border-b border-solid border-[#000] h-20 w-11">
-        <div class="text-center mt-15">-</div>
-        <div class="absolute left-0 bottom-0 w-4 h-4 border-l border-solid border-[#000]"></div>
-        <div class="absolute left-0 right-0 -bottom-9 text-center flex items-center justify-center">
+      <div class="absolute top-9 left-17 h-20 w-11 border-r border-b border-solid border-[#000]">
+        <div class="mt-15 text-center">-</div>
+        <div class="absolute bottom-0 left-0 h-4 w-4 border-l border-solid border-[#000]"></div>
+        <div class="absolute right-0 -bottom-9 left-0 flex items-center justify-center text-center">
           <span
             :class="['p-1', !props.showAnswer && 'border']"
             :style="props.showAnswer ? { color: props.answerColor } : {}"

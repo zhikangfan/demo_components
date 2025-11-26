@@ -25,11 +25,11 @@
             <Input v-model:value="pinyinForm.custom" />
           </FormItem>
           <div class="flex flex-col gap-2 text-lg">
-            <div class="flex gap-2 items-center" v-for="(item, idx) in yinbiao[0]" :key="idx">
+            <div class="flex items-center gap-2" v-for="(item, idx) in yinbiao[0]" :key="idx">
               <div
                 v-for="(row, rowIndex) in yinbiao"
                 :key="rowIndex"
-                class="flex-1 border border-solid border-gray-300 p-1 rounded cursor-pointer text-center hover:bg-[#b9dccc]/20"
+                class="flex-1 cursor-pointer rounded border border-solid border-gray-300 p-1 text-center hover:bg-[#b9dccc]/20"
                 @click="handleYinbiaoClick(row[idx])"
               >
                 {{ row[idx] }}

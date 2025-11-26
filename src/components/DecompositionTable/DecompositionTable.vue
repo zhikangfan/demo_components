@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid leading-none w-full"
+    class="grid w-full leading-none"
     :style="{
       fontSize: `${fontSize}px`,
       gridTemplateColumns: `repeat(${column}, minmax(0px, 1fr))`,

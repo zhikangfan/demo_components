@@ -2,34 +2,41 @@
   <div class="p-4">
     <!-- Toolbar -->
     <div class="mb-4 flex gap-2">
-      <button class="px-4 py-2 bg-blue-500 text-white rounded" @click="addH1Widget">
+      <button class="rounded bg-blue-500 px-4 py-2 text-white" @click="addH1Widget">
         添加 H1 组件
       </button>
-      <button class="px-4 py-2 bg-green-600 text-white rounded" @click="exportWidgets">
+      <button class="rounded bg-green-600 px-4 py-2 text-white" @click="exportWidgets">
         导出 Widgets
       </button>
-      <button class="px-4 py-2 bg-gray-700 text-white rounded" @click="loadWidgets">
+      <button class="rounded bg-gray-700 px-4 py-2 text-white" @click="loadWidgets">
         加载 Widgets
       </button>
     </div>
 
     <!-- Gridstack Container -->
     <div
-      class="paper shadow-lg m-auto box-border"
+      class="paper m-auto box-border shadow-lg"
       style="width: 210mm; height: 297mm; padding: 10mm"
+      @click="handleClickPaper"
     >
-      <div class="w-full h-full relative box-border">
+      <div class="relative box-border h-full w-full">
         <div class="grid-stack"></div>
       </div>
+    </div>
+    <div class="fixed right-0 top-0 w-[300px] h-full bg-white">
+      <Toolbar v-if="currentSelectWidget?.key === WidgetType.Text" v-bind="currentSelectWidget?.config"/>
+      <div v-else>页面配置</div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { createApp, onMounted, ref } from 'vue'
-import { GridStack } from 'gridstack'
+<script setup lang="ts">
+import {createApp, onMounted, ref} from 'vue'
+import {GridStack} from 'gridstack'
 import Text from '@/components/Text/Text.vue'
-import { currentSelectWidget } from '@/hooks/useRefData.js'
+import {currentSelectWidget} from '@/hooks/useRefData.js'
+import {type Widget, WidgetType} from "../../types";
+import Toolbar from "@/components/Toolbar/Toolbar.vue";
 // import "gridstack/dist/gridstack.css";
 // import "gridstack/dist/gridstack-extra.css";
 
@@ -42,10 +49,28 @@ onMounted(() => {
     float: true,
     cellHeight: 'initial',
     disableOneColumnMode: true,
-    resizable: { handles: 'all' },
+    resizable: {handles: 'all'},
     margin: 0,
     handleClass: 'test',
   })
+  loadWidgets([{
+    "id": "widget-rwdehw8xqt",
+    "key": 0,
+    "x": 0,
+    "y": 0,
+    "w": 12,
+    "config": {
+      "class": "12312",
+      "type": "h3",
+      "text": "标题3",
+      "fontSize": "16",
+      "fontWeight": "bold",
+      "fontStyle": "normal",
+      "textDecoration": "none",
+      "textAlign": "left",
+      "color": "#000000ff"
+    }
+  }])
 })
 
 /**
@@ -63,47 +88,89 @@ const mountVueComponent = (component, props) => {
 // 添加 Widget
 const addH1Widget = () => {
   const widgetId = `widget-${Math.random().toString(36).substring(2, 15)}`
-  grid.addWidget({
+  const widgetConfig = {
+    class: '12312',
+    type: 'h3',
+    text: '标题3',
+    fontSize: '16',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    textDecoration: 'none',
+    textAlign: 'left',
+    color: '#000000ff',
+    padding: {
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
+    }
+  }
+  const widget = {
     id: widgetId,
-    // x: 0,
-    // y: 0,
+    key: WidgetType.Text,
+    x: 0,
+    y: 0,
     w: 12,
     // h: 4,
     noResize: false,
+    config: widgetConfig,
+  }
+  grid.addWidget({
+    ...widget,
     el: mountVueComponent(Text, {
-      id: widgetId,
-      class: '12312',
-      type: 'h3',
-      text: '标题3',
-      fontSize: '16',
-      fontWeight: 'bold',
-      fontStyle: 'normal',
-      textDecoration: 'none',
-      textAlign: 'left',
-      color: '#000000ff',
+      ...widget.config,
       click() {
-        console.log('ok1231')
-        currentSelectWidget.value = widgetId
+        console.log('ok1231', widget)
+        currentSelectWidget.value = widget
       },
     }),
   })
 }
 
+// 加载widgets
+// const loadWidgets = (widgets) => {
+//   // grid.load()
+// }
+
 // 导出 widget 配置
 const exportWidgets = () => {
   savedWidgets.value = grid.save()
-  alert('Widgets 已导出，可通过控制台查看 savedWidgets')
   console.log('Exported Widgets:', savedWidgets.value)
 }
 
-// 加载 widget
-const loadWidgets = () => {
-  if (!savedWidgets.value || savedWidgets.value.length === 0) {
-    alert('当前没有保存的 widgets')
-    return
+const getElement = (widgetType: WidgetType) => {
+  switch (widgetType) {
+    case WidgetType.Text:
+      return Text
+    default:
+      return ''
   }
-  grid.load(savedWidgets.value)
 }
+
+// 加载 widget
+const loadWidgets = (widgets: Widget<unknown>[]) => {
+  const data = widgets.map(widget => {
+    return {
+      ...widget,
+      el: mountVueComponent(getElement(widget.key), {
+        ...widget.config,
+        click() {
+          console.log('ok1231', widget)
+          currentSelectWidget.value = widget
+        },
+      }),
+    }
+  })
+  grid.load(data)
+}
+
+/**
+ * 点击纸张
+ */
+const handleClickPaper = () => {
+  currentSelectWidget.value = null;
+}
+
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <PinyinRow v-bind="otherProps" />
-    <div class="whitespace-pre gap-4 flex items-center" :style="{ marginTop: `${margin}mm` }">
+    <div class="flex items-center gap-4 whitespace-pre" :style="{ marginTop: `${margin}mm` }">
       <span v-if="showChinese" style="color: rgb(153, 153, 153); font-size: 16px">{{
         translation
       }}</span

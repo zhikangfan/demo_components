@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1 relative group hover:bg-[#b9dccc]/20">
+  <div class="group relative p-1 hover:bg-[#b9dccc]/20">
     <div class="flex items-center">
       <template v-for="(it, idx) in props.question" :key="idx">
         <span v-if="idx === props.question.length - 1">=</span>
