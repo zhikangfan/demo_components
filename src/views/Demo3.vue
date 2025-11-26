@@ -23,20 +23,23 @@
         <div class="grid-stack"></div>
       </div>
     </div>
-    <div class="fixed right-0 top-0 w-[300px] h-full bg-white">
-      <Toolbar v-if="currentSelectWidget?.key === WidgetType.Text" v-bind="currentSelectWidget?.config"/>
+    <div class="fixed top-0 right-0 h-full w-[300px] bg-white">
+      <Toolbar
+        v-if="currentSelectWidget?.key === WidgetType.Text"
+        v-bind="currentSelectWidget?.config"
+      />
       <div v-else>页面配置</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {createApp, onMounted, ref} from 'vue'
-import {GridStack} from 'gridstack'
+import { createApp, onMounted, ref } from 'vue'
+import { GridStack } from 'gridstack'
 import Text from '@/components/Text/Text.vue'
-import {currentSelectWidget} from '@/hooks/useRefData.js'
-import {type Widget, WidgetType} from "../../types";
-import Toolbar from "@/components/Toolbar/Toolbar.vue";
+import { currentSelectWidget } from '@/hooks/useRefData.js'
+import { type Widget, WidgetType } from '../../types'
+import Toolbar from '@/components/Toolbar/Toolbar.vue'
 // import "gridstack/dist/gridstack.css";
 // import "gridstack/dist/gridstack-extra.css";
 
@@ -49,28 +52,30 @@ onMounted(() => {
     float: true,
     cellHeight: 'initial',
     disableOneColumnMode: true,
-    resizable: {handles: 'all'},
+    resizable: { handles: 'all' },
     margin: 0,
     handleClass: 'test',
   })
-  loadWidgets([{
-    "id": "widget-rwdehw8xqt",
-    "key": 0,
-    "x": 0,
-    "y": 0,
-    "w": 12,
-    "config": {
-      "class": "12312",
-      "type": "h3",
-      "text": "标题3",
-      "fontSize": "16",
-      "fontWeight": "bold",
-      "fontStyle": "normal",
-      "textDecoration": "none",
-      "textAlign": "left",
-      "color": "#000000ff"
-    }
-  }])
+  loadWidgets([
+    {
+      id: 'widget-rwdehw8xqt',
+      key: 0,
+      x: 0,
+      y: 0,
+      w: 12,
+      config: {
+        class: '12312',
+        type: 'h3',
+        text: '标题3',
+        fontSize: '16',
+        fontWeight: 'bold',
+        fontStyle: 'normal',
+        textDecoration: 'none',
+        textAlign: 'left',
+        color: '#000000ff',
+      },
+    },
+  ])
 })
 
 /**
@@ -102,8 +107,8 @@ const addH1Widget = () => {
       top: 0,
       left: 0,
       right: 0,
-      bottom: 0
-    }
+      bottom: 0,
+    },
   }
   const widget = {
     id: widgetId,
@@ -149,7 +154,7 @@ const getElement = (widgetType: WidgetType) => {
 
 // 加载 widget
 const loadWidgets = (widgets: Widget<unknown>[]) => {
-  const data = widgets.map(widget => {
+  const data = widgets.map((widget) => {
     return {
       ...widget,
       el: mountVueComponent(getElement(widget.key), {
@@ -168,9 +173,8 @@ const loadWidgets = (widgets: Widget<unknown>[]) => {
  * 点击纸张
  */
 const handleClickPaper = () => {
-  currentSelectWidget.value = null;
+  currentSelectWidget.value = null
 }
-
 </script>
 
 <style>
