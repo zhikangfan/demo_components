@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useTemplateRef, ref } from 'vue'
+import { computed, useTemplateRef, ref, createVNode } from 'vue'
 import ChineseCell from '@/components/ChineseCell/index.vue'
 import PinyinRow from '@/components/PinyinRow/index.vue'
 import PinyinTable from '@/components/PinyinTable/index.vue'
@@ -18,6 +18,12 @@ import Text from '@/components/Text/Text.vue'
 import DecompositionTable from '@/components/DecompositionTable/DecompositionTable.vue'
 import DecompositionSubtractionTable from '@/components/DecompositionSubtractionTable/DecompositionSubtractionTable.vue'
 import AdditionTable from '@/components/additionTable/additionTable.vue'
+import { Modal, Input, Textarea } from 'ant-design-vue'
+import { useContentModal } from '@/hooks/useContentModal.js'
+import InputContent from '@/views/HomeView/InputContent.vue'
+import InputPinyinContent from '@/views/HomeView/InputPinyinContent.vue'
+import HanZi from '@/views/HomeView/HanZi.vue'
+import Math from '@/views/HomeView/Math.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -77,10 +83,16 @@ const width = ref(716)
 // setInterval(() => {
 //   width.value -= 20
 // }, 1000)
+const val = ref('a\nb\nc')
 </script>
 
 <template>
   <div :class="ss.pager">
+    <!--    <HanZi/>-->
+    <Math />
+    <!--    {{ val }}-->
+    <!--    <InputContent v-model:value="val"/>-->
+    <!--    <InputPinyinContent v-model:value="val" />-->
     <!--        <PinyinTable-->
     <!--          :content="['a', 'b']"-->
     <!--              :unfilled-rows="2"-->

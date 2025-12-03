@@ -123,4 +123,6 @@ html::-webkit-scrollbar-track {
   mask-size: 100% 100%;
   width: 1em;
 }
-@import 'tailwindcss';
+@import 'tailwindcss/theme.css';
+/*@import "tailwindcss/preflight.css" layer(base);*/
+@import 'tailwindcss/utilities.css';

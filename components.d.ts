@@ -8,13 +8,19 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AAlert: typeof import('ant-design-vue/es')['Alert']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     AdditionTable: typeof import('./src/components/additionTable/additionTable.vue')['default']
     AForm: typeof import('ant-design-vue/es')['Form']
     AFormItem: typeof import('ant-design-vue/es')['FormItem']
     AInput: typeof import('ant-design-vue/es')['Input']
+    AInputNumber: typeof import('ant-design-vue/es')['InputNumber']
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
+    AModal: typeof import('ant-design-vue/es')['Modal']
+    ATabPane: typeof import('ant-design-vue/es')['TabPane']
+    ATabs: typeof import('ant-design-vue/es')['Tabs']
+    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     Chinese: typeof import('./src/components/Chinese/index.vue')['default']
     ChineseCell: typeof import('./src/components/ChineseCell/index.vue')['default']
     ChineseParagraphTable: typeof import('./src/components/ChineseParagraphTable/ChineseParagraphTable.vue')['default']
