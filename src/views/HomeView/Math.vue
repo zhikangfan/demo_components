@@ -134,7 +134,7 @@ console.log(conversionTimeList, '---conversionTimeList')
 
 const rmbList = new Array(total).fill('').map((item) => {
   return generateRMBBreakdownItem({
-    selectedUnits: [500, 100, 10, 1],
+    selectedUnits: [10000, 500, 100, 10, 1],
   })
 })
 console.log(rmbList, '---rmbList')
