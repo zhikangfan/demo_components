@@ -24,6 +24,7 @@ import InputContent from '@/views/HomeView/InputContent.vue'
 import InputPinyinContent from '@/views/HomeView/InputPinyinContent.vue'
 import HanZi from '@/views/HomeView/HanZi.vue'
 import Math from '@/views/HomeView/Math.vue'
+import Export from '@/views/HomeView/Export.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -88,27 +89,28 @@ const val = ref('a\nb\nc')
 
 <template>
   <div :class="ss.pager">
+    <Export />
     <!--    <HanZi/>-->
     <Math />
     <!--    {{ val }}-->
     <!--    <InputContent v-model:value="val"/>-->
     <!--    <InputPinyinContent v-model:value="val" />-->
-    <!--        <PinyinTable-->
-    <!--          :content="['a', 'b']"-->
-    <!--              :unfilled-rows="2"-->
-    <!--              line-spacing="10"-->
-    <!--              :filled-number="2"-->
-    <!--              :unfilled-number="8"-->
-    <!--              filled-color="red"-->
-    <!--              unfilled-color="blue"-->
-    <!--              letter-spacing="40"-->
-    <!--              line-height="140"-->
-    <!--              font-size="24"-->
-    <!--              height="15"-->
-    <!--              :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
-    <!--              :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
-    <!--              :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
-    <!--        />-->
+<!--            <PinyinTable-->
+<!--              :content="['a', 'b']"-->
+<!--                  :unfilled-rows="2"-->
+<!--                  line-spacing="10"-->
+<!--                  :filled-number="2"-->
+<!--                  :unfilled-number="8"-->
+<!--                  filled-color="red"-->
+<!--                  unfilled-color="blue"-->
+<!--                  letter-spacing="40"-->
+<!--                  line-height="140"-->
+<!--                  font-size="24"-->
+<!--                  height="15"-->
+<!--                  :outer-line="{stroke: '#ff0000', strokeWidth: '5', strokeDasharray: '3'}"-->
+<!--                  :inner-line="{stroke: '#6df707', strokeWidth: '5', strokeDasharray: '1'}"-->
+<!--                  :split-line="{stroke: '#bd0fdb', strokeWidth: '5', strokeDasharray: 4}"-->
+<!--            />-->
 
     <!--            <ChineseTable-->
     <!--              :content="['中', '，', '', '国']"-->
@@ -154,17 +156,17 @@ const val = ref('a\nb\nc')
     <!--      :scale="80"-->
     <!--    />-->
 
-    <!--    <EnglishWordTable-->
-    <!--      :content="['One:一', 'Two:二']"-->
-    <!--      :show-phonetic="true"-->
-    <!--      :show-chinese="true"-->
-    <!--      :margin="1"-->
-    <!--      :height="10"-->
-    <!--      :unfilled-rows="1"-->
-    <!--      :filled-number="5"-->
-    <!--      :unfilled-number="2"-->
-    <!--      :line-spacing="8"-->
-    <!--    />-->
+<!--        <EnglishWordTable-->
+<!--          :content="['One:一', 'Two:二']"-->
+<!--          :show-phonetic="true"-->
+<!--          :show-chinese="true"-->
+<!--          :margin="1"-->
+<!--          :height="10"-->
+<!--          :unfilled-rows="1"-->
+<!--          :filled-number="5"-->
+<!--          :unfilled-number="2"-->
+<!--          :line-spacing="8"-->
+<!--        />-->
 
     <!--    <EnglishParagraphTable-->
     <!--      :content="['How are you', 'I am fine']"-->
