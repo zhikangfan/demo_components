@@ -72,7 +72,7 @@ const handleExportImageJSPdf2 = async (width = 210, height = 297) => {
 
   const imgURL = await toPng(element, {
     backgroundColor: '#fff',
-    pixelRatio: 1,
+    pixelRatio: 3,
   })
   const orientation = width > height ? 'landscape' : 'portrait'
   const pdf = new jsPDF({

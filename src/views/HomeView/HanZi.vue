@@ -1,57 +1,69 @@
 <template>
-  <div>
-    <div class="h-[38px] w-[38px] border">
-      <div ref="div"></div>
+  <div class="m-auto mt-20 w-2xl">
+    <div
+      :class="[`relative border`]"
+      :style="{ width: form.size + 'px', height: form.size + 'px' }"
+    >
+      <div
+        ref="div"
+        v-html="svg"
+        class="absolute"
+        :style="{
+          left: `${form.translateX}%`,
+          top: `${form.translateY}%`,
+          transform: `scale(${form.scale / 100})`,
+        }"
+      ></div>
     </div>
-    <a-input-number v-model:value="form.scale" />
+    <a-space>
+      size：
+      <a-input-number v-model:value="form.size" />
+      x轴：
+      <a-input-number v-model:value="form.translateX" />
+      y轴：
+      <a-input-number v-model:value="form.translateY" />
+      缩放：
+      <a-input-number v-model:value="form.scale" />
+    </a-space>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, reactive, useTemplateRef, watch } from 'vue'
+import { reactive, ref, watchEffect } from 'vue'
 import HanziWriter from 'hanzi-writer'
-const divRef = useTemplateRef('div')
-const form = ref({
-  scale: 50,
+
+const form = reactive({
+  scale: 100,
+  translateX: 0, // 默认50%居中
+  translateY: 0, // 默认50%居中
+  size: 50,
 })
-const loadFont = (font, { scale }) => {
+const svg = ref('')
+
+const loadFont = (font, { scale = 100, size = 50 }) => {
   HanziWriter.loadCharacterData(font).then(function (charData) {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-    // svg.style.width = '38';
-    // svg.style.height = '38';
-    svg.setAttributeNS(null, 'viewBox', '0 0 1024 1024')
-    svg.setAttribute('width', 38)
-    svg.setAttribute('height', 38)
-    divRef.value.appendChild(svg)
-    var group = document.createElementNS('http://www.w3.org/2000/svg', 'g')
-
-    // set the transform property on the g element so the character renders at 38x38
     var transformData = HanziWriter.getScalingTransform(1024, 1024)
-    const offset = ((1 - scale) * 1024) / 2
-    group.setAttributeNS(
-      null,
-      'transform',
-      `translate(${offset}, ${offset}) scale(1,-1) scale(${scale})`,
-    )
-    svg.appendChild(group)
-
-    charData.strokes.forEach(function (strokePath) {
-      var path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-      path.setAttributeNS(null, 'd', strokePath)
-      // style the character paths
-      path.style.fill = '#555'
-      group.appendChild(path)
+    const paths = charData.strokes.map((path) => {
+      return `<path d="${path}" fill="#000"></path>`
     })
+
+    svg.value = `<svg
+      viewBox="0 0 1024 1024"
+      width="${size}"
+      height="${size}"
+    >
+      <g transform="${transformData.transform}">
+        ${paths.join('')}
+      </g>
+    </svg>`
   })
 }
-// watch([() => form.value.scale], ([scale]) => {
-//   console.log(123)
-//   loadFont('六', {
-//     scale: scale
-//   })
-// })
+
 watchEffect(() => {
   loadFont('六', {
-    scale: form.value.scale / 100,
+    scale: form.scale,
+    translateX: form.translateX,
+    translateY: form.translateY,
+    size: form.size,
   })
 })
 </script>

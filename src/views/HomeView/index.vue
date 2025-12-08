@@ -25,6 +25,9 @@ import InputPinyinContent from '@/views/HomeView/InputPinyinContent.vue'
 import HanZi from '@/views/HomeView/HanZi.vue'
 import Math from '@/views/HomeView/Math.vue'
 import Export from '@/views/HomeView/Export.vue'
+import PinYinLine from '@/components/Icon/PinYinLine.vue'
+import TestLine from '@/views/HomeView/TestLine.vue'
+import Font from '@/views/HomeView/Font.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -89,9 +92,11 @@ const val = ref('a\nb\nc')
 
 <template>
   <div :class="ss.pager">
-    <!--    <Export />-->
-    <!--    <HanZi/>-->
-    <Math />
+    <Font />
+    <!--    <TestLine/>-->
+    <!--        <Export />-->
+    <!--        <HanZi/>-->
+    <!--    <Math />-->
     <!--    {{ val }}-->
     <!--    <InputContent v-model:value="val"/>-->
     <!--    <InputPinyinContent v-model:value="val" />-->
