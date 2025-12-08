@@ -28,6 +28,7 @@ import Export from '@/views/HomeView/Export.vue'
 import PinYinLine from '@/components/Icon/PinYinLine.vue'
 import TestLine from '@/views/HomeView/TestLine.vue'
 import Font from '@/views/HomeView/Font.vue'
+import TestText from './TextText.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -92,7 +93,8 @@ const val = ref('a\nb\nc')
 
 <template>
   <div :class="ss.pager">
-    <Font />
+    <TestText />
+    <!--    <Font />-->
     <!--    <TestLine/>-->
     <!--        <Export />-->
     <!--        <HanZi/>-->
