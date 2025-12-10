@@ -18,44 +18,62 @@ export const generateContinuousAddOrSubtractItem = ({
   type = 'mix',
   count = 3,
 }) => {
-  // 生成所有数字
-  const numbers = new Array(count).fill(0).map(() => getSingleNumber(range, digits, exclude))
-
+  // 生成第一个数字
+  const firstNumber = getSingleNumber(
+    {
+      min: type === 'subtract' ? range.min : range.min * count,
+      max: range.max,
+    },
+    digits,
+    exclude,
+  )
+  let prev = firstNumber
   // 构建表达式列表并计算结果
-  let result = new Decimal(numbers[0]) // 使用 Decimal 初始化
+  let result = new Decimal(firstNumber) // 使用 Decimal 初始化
   const list = [
     {
       type: 'number',
-      value: numbers[0],
+      value: firstNumber,
     },
   ]
 
-  for (let i = 1; i < numbers.length; i++) {
+  for (let i = 1; i < count; i++) {
     let symbol = ''
+    let number = getSingleNumber(range, digits, exclude)
     if (type === 'add') {
       symbol = '+'
     } else if (type === 'subtract') {
       symbol = '-'
+      number = getSingleNumber(
+        {
+          min: range.min,
+          max: prev,
+        },
+        digits,
+        exclude,
+      )
+      prev = prev - number
     } else if (type === 'mix') {
       symbol = Math.random() > 0.5 ? '+' : '-'
     }
 
     // 根据符号使用 Decimal 计算结果
     if (symbol === '+') {
-      result = result.plus(numbers[i])
+      result = result.plus(number)
     } else {
-      result = result.minus(numbers[i])
+      result = result.minus(number)
     }
 
-    // 添加到表达式列表
-    list.push({
-      type: 'symbol',
-      value: symbol,
-    })
-    list.push({
-      type: 'number',
-      value: numbers[i],
-    })
+    list.push(
+      {
+        type: 'symbol',
+        value: symbol,
+      },
+      {
+        type: 'number',
+        value: number,
+      },
+    )
   }
 
   return {

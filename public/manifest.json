@@ -1,0 +1,15 @@
+{
+  "name": "我的测试站点",
+  "short_name": "测试站点",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "测试描述",
+  "icons": [
+    {
+      "src": "manifest.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}

@@ -92,13 +92,13 @@ const val = ref('a\nb\nc')
 </script>
 
 <template>
-  <div :class="ss.pager">
-    <TestText />
+  <div class="h-full w-full" style="height: 100vh">
+    <!--    <TestText />-->
     <!--    <Font />-->
     <!--    <TestLine/>-->
     <!--        <Export />-->
     <!--        <HanZi/>-->
-    <!--    <Math />-->
+    <Math />
     <!--    {{ val }}-->
     <!--    <InputContent v-model:value="val"/>-->
     <!--    <InputPinyinContent v-model:value="val" />-->
