@@ -29,6 +29,7 @@ import PinYinLine from '@/components/Icon/PinYinLine.vue'
 import TestLine from '@/views/HomeView/TestLine.vue'
 import Font from '@/views/HomeView/Font.vue'
 import TestText from './TextText.vue'
+import Conversion from '@/views/HomeView/Conversion.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -93,12 +94,13 @@ const val = ref('a\nb\nc')
 
 <template>
   <div class="h-full w-full" style="height: 100vh">
+    <!--    <Conversion/>-->
     <!--    <TestText />-->
-    <!--    <Font />-->
+    <Font />
     <!--    <TestLine/>-->
     <!--        <Export />-->
     <!--        <HanZi/>-->
-    <Math />
+    <!--    <Math />-->
     <!--    {{ val }}-->
     <!--    <InputContent v-model:value="val"/>-->
     <!--    <InputPinyinContent v-model:value="val" />-->
@@ -163,17 +165,17 @@ const val = ref('a\nb\nc')
     <!--      :scale="80"-->
     <!--    />-->
 
-    <!--        <EnglishWordTable-->
-    <!--          :content="['One:一', 'Two:二']"-->
-    <!--          :show-phonetic="true"-->
-    <!--          :show-chinese="true"-->
-    <!--          :margin="1"-->
-    <!--          :height="10"-->
-    <!--          :unfilled-rows="1"-->
-    <!--          :filled-number="5"-->
-    <!--          :unfilled-number="2"-->
-    <!--          :line-spacing="8"-->
-    <!--        />-->
+    <!--            <EnglishWordTable-->
+    <!--              :content="['One:一', 'Two:二', 'Three:三', 'Four:四']"-->
+    <!--              :show-phonetic="true"-->
+    <!--              :show-chinese="true"-->
+    <!--              :margin="1"-->
+    <!--              :height="10"-->
+    <!--              :unfilled-rows="1"-->
+    <!--              :filled-number="5"-->
+    <!--              :unfilled-number="2"-->
+    <!--              :line-spacing="8"-->
+    <!--            />-->
 
     <!--    <EnglishParagraphTable-->
     <!--      :content="['How are you', 'I am fine']"-->

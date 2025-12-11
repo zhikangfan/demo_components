@@ -10,7 +10,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { watchEffect, ref } from 'vue'
 import EnglishWordRow from '@/components/EnglishWordRow/EnglishWordRow.vue'
 import EnglishWordRowProps from '@/components/EnglishWordRow/props.js'
@@ -88,6 +88,22 @@ const handleEdit = (value, rowIndex) => {
   rows.value[rowIndex].phonetic = value
 }
 watchEffect(async () => {
+  // content.map((text,idx) => {
+  //   const [word = '', chinese = ''] = text.split(':')
+  //   getPhonetic(word, chinese).then(res => {
+  //     rows.value[idx] = {
+  //       ...rows.value[idx],
+  //       ...res
+  //     }
+  //   })
+  // })
+  // const data = content.map(text => {
+  //   const [word = '', chinese = ''] = text.split(':')
+  //   return {
+  //     origin: word,
+  //     translation: chinese,
+  //   }
+  // })
   const tasks = content.map((text) => {
     const [word = '', chinese = ''] = text.split(':')
     return getPhonetic(word, chinese)
