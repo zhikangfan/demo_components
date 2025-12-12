@@ -30,6 +30,7 @@ import TestLine from '@/views/HomeView/TestLine.vue'
 import Font from '@/views/HomeView/Font.vue'
 import TestText from './TextText.vue'
 import Conversion from '@/views/HomeView/Conversion.vue'
+import TestModal from '@/views/HomeView/TestModal.vue'
 const props = defineProps({
   text: {
     type: String,
@@ -94,9 +95,10 @@ const val = ref('a\nb\nc')
 
 <template>
   <div class="h-full w-full" style="height: 100vh">
+    <TestModal />
     <!--    <Conversion/>-->
     <!--    <TestText />-->
-    <Font />
+    <!--    <Font />-->
     <!--    <TestLine/>-->
     <!--        <Export />-->
     <!--        <HanZi/>-->
