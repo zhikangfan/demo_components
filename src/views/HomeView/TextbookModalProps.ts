@@ -21,6 +21,7 @@ export enum Edition {
 export enum LearnType {
   Read, // 识字
   Write, // 写字
+  Words, // 词语
 }
 // 章节
 export interface Section {

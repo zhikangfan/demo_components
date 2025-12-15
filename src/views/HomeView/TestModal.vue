@@ -1,61 +1,34 @@
 <template>
-  <div>
+  <div class="text-sm text-[#333333]">
     快捷输入：
-    <div v-for="textbook in Textbooks" :key="textbook.grade">
-      {{ getGradeName(textbook.grade) }}（）
+    <div v-for="(textbookArr, grade) in textbooks" :key="grade">
+      {{ getGradeName(Number(grade)) }}（<template
+        v-for="(textbook, idx) in textbookArr"
+        :key="`${textbook.grade}_${textbook.volume}`"
+      >
+        <span
+          class="cursor-pointer text-[red] hover:underline"
+          @click="() => handleModal(textbook)"
+          >{{ getVolumeName(textbook.volume) }}</span
+        >{{ idx === textbookArr.length - 1 ? '' : '、' }} </template
+      >）
     </div>
   </div>
-  <TextbookModal />
+  <TextbookModal
+    v-model:open="open"
+    :grade="currentTextbook.grade"
+    :volume="currentTextbook.volume"
+    :edition="currentTextbook.edition"
+    @ok="handleConfirm"
+    @cancel="handleCancel"
+  />
 </template>
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import _ from 'lodash'
 import TextbookModal from '@/views/HomeView/TextbookModal.vue'
-import { Grade, Volume } from '@/views/HomeView/TextbookModalProps.ts'
-import Textbooks from './textbook.config.ts'
-// const textbooks: { grade: Grade, volumes: Volume[]}[] = [
-//   {
-//     grade: Grade.Frist,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   },
-//   {
-//     grade: Grade.Second,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   },
-//   {
-//     grade: Grade.Third,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   },
-//   {
-//     grade: Grade.Fourth,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   },
-//   {
-//     grade: Grade.Fifth,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   },
-//   {
-//     grade: Grade.Sixth,
-//     volumes: [
-//       Volume.I,
-//       Volume.II
-//     ]
-//   }
-// ]
-
+import { Edition, Grade, type Textbook, Volume } from '@/views/HomeView/TextbookModalProps.ts'
+const textbooks = ref([])
 const getGradeName = (grade: Grade) => {
   switch (grade) {
     case Grade.Frist:
@@ -80,4 +53,40 @@ const getVolumeName = (volume: Volume) => {
       return '下册'
   }
 }
+const loading = ref(false)
+const open = ref(false)
+const currentTextbook = ref({
+  grade: Grade.Frist,
+  volume: Volume.I,
+  edition: Edition.UnifiedEdition,
+})
+const handleModal = (textbook: Textbook) => {
+  currentTextbook.value = {
+    grade: textbook.grade,
+    volume: textbook.volume,
+    edition: textbook.edition,
+  }
+  open.value = true
+}
+const handleConfirm = (content: string[]) => {
+  console.log(content, '--cc')
+  open.value = false
+}
+const handleCancel = () => {
+  open.value = false
+}
+const fetchData = async () => {
+  loading.value = true
+  try {
+    const result = await fetch('textbook.json').then((res) => res.json())
+    textbooks.value = _.groupBy(result, 'grade')
+  } catch (e) {
+    textbooks.value = []
+  } finally {
+    loading.value = false
+  }
+}
+onMounted(() => {
+  fetchData()
+})
 </script>

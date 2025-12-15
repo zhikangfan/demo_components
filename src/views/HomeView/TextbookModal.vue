@@ -1,20 +1,34 @@
 <template>
-  <a-modal title="" @ok="handleOk" @cancel="handleCancel" @after-close="handleAfterClose">
+  <a-modal
+    v-model:open="modelOpen"
+    title=""
+    @ok="handleOk"
+    @cancel="handleCancel"
+    @after-close="handleAfterClose"
+  >
     <a-tabs v-model:activeKey="activeEdition" @change="onChangeEdition">
       <a-tab-pane :key="editionTab.value" :tab="editionTab.label" v-for="editionTab in editionTabs">
         <div>
           <a-tabs v-model:activeKey="activeLearnType" tab-position="left">
             <a-tab-pane :key="tab.value" :tab="tab.label" v-for="tab in learnTypeTabs">
-              <div v-for="section in currentSections" :key="section.name">
-                {{ section.name }}
-                <div
-                  :class="{ 'text-[red]': isActiveLesson(section.name, lesson.name) }"
-                  v-for="lesson in section.lessons"
-                  :key="`${section.name}_${lesson.name}`"
-                  @click="() => handleSelect(section.name, lesson.name)"
-                >
-                  {{ lesson.name }}
+              <div v-for="section in currentSections" :key="section.name" class="mb-3">
+                <div class="mb-2 text-lg">
+                  {{ section.name }}
                 </div>
+                <a-space :size="[16, 2]" wrap>
+                  <div
+                    :class="[
+                      { 'text-[red]': isActiveLesson(section.name, lesson.name) },
+                      'cursor-pointer',
+                      'hover:text-[red]',
+                    ]"
+                    v-for="lesson in section.lessons"
+                    :key="`${section.name}_${lesson.name}`"
+                    @click="() => handleSelect(section.name, lesson.name)"
+                  >
+                    {{ lesson.name }}
+                  </div>
+                </a-space>
               </div>
             </a-tab-pane>
           </a-tabs>
@@ -34,6 +48,11 @@ import {
   type Textbook,
   type Section,
 } from './TextbookModalProps'
+import Textbooks from './textbook.config.ts'
+
+const modelOpen = defineModel('open', {
+  default: false,
+})
 
 const emits = defineEmits<{
   (e: 'ok', content: string[]): void
@@ -44,17 +63,17 @@ const emits = defineEmits<{
 const props = withDefaults(defineProps<TextbookProps>(), {
   grade: Grade.Frist,
   volume: Volume.I,
-  edition: Edition.DepartmentalEdition,
+  edition: Edition.UnifiedEdition,
 })
 const editionTabs: { label: string; value: Edition }[] = [
-  {
-    label: '部编版',
-    value: Edition.DepartmentalEdition,
-  },
-  {
-    label: '部编版（5年制）',
-    value: Edition.DepartmentalEdition5Year,
-  },
+  // {
+  //   label: '部编版',
+  //   value: Edition.DepartmentalEdition,
+  // },
+  // {
+  //   label: '部编版（5年制）',
+  //   value: Edition.DepartmentalEdition5Year,
+  // },
   {
     label: '统编版',
     value: Edition.UnifiedEdition,
@@ -69,14 +88,13 @@ const learnTypeTabs: { label: string; value: LearnType }[] = [
     label: '写字',
     value: LearnType.Write,
   },
+  {
+    label: '词语',
+    value: LearnType.Words,
+  },
 ]
-const open = ref(false)
 
-const activeGrade = ref(Grade.Frist)
-
-const activeVolume = ref(Volume.I)
-
-const activeEdition = ref(Edition.DepartmentalEdition)
+const activeEdition = ref(props.edition)
 
 const activeLearnType = ref(LearnType.Read)
 
@@ -84,45 +102,17 @@ const currentSections = ref<Section[]>([])
 
 const activeLessons = ref<string[]>([])
 
-const textbook: Textbook = {
-  grade: Grade.Frist,
-  volume: Volume.I,
-  edition: Edition.DepartmentalEdition,
-  sections: [
-    {
-      name: '识字',
-      lessons: [
-        {
-          name: '第一课',
-          learnType: [LearnType.Read],
-          content: ['你', '好'],
-        },
-      ],
-    },
-    {
-      name: '识字2',
-      lessons: [
-        {
-          name: '第一课',
-          learnType: [LearnType.Read, LearnType.Write],
-          content: ['你', '好'],
-        },
-      ],
-    },
-  ],
-}
-
-const textbooks: Textbook[] = [textbook]
+const textbooks: Textbook[] = Textbooks
 
 watch(
-  [activeGrade, activeVolume, activeEdition, activeLearnType],
-  () => {
+  [() => props.grade, () => props.volume, () => props.edition, activeLearnType],
+  ([activeGrade, activeVolume, activeEdition, activeLearnType]) => {
     // 筛选课本
     const textbookResult = textbooks.find((textbook) => {
       return (
-        textbook.grade === activeGrade.value &&
-        textbook.volume === activeVolume.value &&
-        textbook.edition === activeEdition.value
+        textbook.grade === activeGrade &&
+        textbook.volume === activeVolume &&
+        textbook.edition === activeEdition
       )
     })
     if (textbookResult) {
@@ -131,7 +121,7 @@ watch(
         .map((section) => {
           // 筛选课程
           const lessonsResult = section.lessons.filter((lesson) =>
-            lesson.learnType.includes(activeLearnType.value),
+            lesson.learnType.includes(activeLearnType),
           )
           return {
             ...section,
@@ -148,14 +138,6 @@ watch(
   },
 )
 
-const handleOpen = () => {
-  // 给初始值
-  activeGrade.value = Grade.Frist
-  activeVolume.value = Volume.I
-  activeEdition.value = Edition.DepartmentalEdition
-  activeLearnType.value = LearnType.Read
-  open.value = true
-}
 const onChangeEdition = () => {
   activeLearnType.value = LearnType.Read
 }
@@ -178,6 +160,7 @@ const handleCancel = () => {
   emits('cancel')
 }
 const handleAfterClose = () => {
+  activeLearnType.value = LearnType.Read
   emits('afterClose')
 }
 // 添加判断课程是否被选中的方法
